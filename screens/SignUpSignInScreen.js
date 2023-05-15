@@ -4,10 +4,13 @@ export default function SignUpSignInScreen({ navigation }){
 
     return(
         <View style={styles.container}>
+            <View style={styles.imgContainer}>
+            <Image source={require('../assets/logo1.png') } style={styles.logo}></Image>
 
-        <Image source={require('../assets/logo1.png') } style={styles.logo}></Image>
+            </View>
 
-        <View style={styles.imgContainer}>
+
+        <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.signup}>
                 <Text style={styles.signupText}>Sign Up</Text>
             </TouchableOpacity>
@@ -30,18 +33,36 @@ const styles = StyleSheet.create({
     },
     imgContainer: {
         color: 'white',
+        paddingBottom: 20,
+        marginBottom: 100,
     },
     signup: {
-        borderWidth: 'solid',
+        borderWidth: 2,
         borderColor: 'gray',
+        padding: 15,
+        width: 330,
+        borderRadius: '10%',
+        marginBottom: 10,
+    },
+    signin: {
+        padding: 15,
+        width: 330,
+        backgroundColor: '#7C4DFF',
+        borderRadius: '10%',
+
     },
     signupText: {
         color: 'white',
         fontFamily: 'PoppinsBold',
+        textAlign: 'center',
+        fontSize : 20,
+
     },
     signinText: {
         color: 'white',
         fontFamily: 'PoppinsBold',
+        textAlign: 'center',
+        fontSize : 20,
     }
   });
 
