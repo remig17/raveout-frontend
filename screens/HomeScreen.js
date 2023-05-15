@@ -1,22 +1,31 @@
-import {
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-  } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 
 
   export default function HomeScreen({ navigation }) {
     return (
-      <View>
+      <View style={styles.main}>
         <Text>Home Screen</Text>
         <Button
           title="Preferences"
-          onPress={() => navigation.navigate('PreferenceScreen')}
+          onPress={() => navigation.navigate('Preference')}
+        />
+         <Button
+          title="Login"
+          onPress={() => navigation.navigate('Login')}
+        />
+         <Button
+          title="SignUp"
+          onPress={() => navigation.navigate('SignUp')}
         />
       </View>
     );
    }
+
+   const styles = StyleSheet.create({
+    main: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
