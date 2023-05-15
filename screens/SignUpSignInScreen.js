@@ -11,11 +11,11 @@ export default function SignUpSignInScreen({ navigation }){
 
 
         <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.signup}>
+            <TouchableOpacity style={styles.signup} onPress={() => navigation.navigate('SignUp')}>
                 <Text style={styles.signupText}>Sign Up</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.signin}>
-                <Text style={styles.signinText}>Sign In</Text>
+                <Text style={styles.signinText} onPress={() => navigation.navigate('SignIn')}>Sign In</Text>
             </TouchableOpacity>
 
         </View>

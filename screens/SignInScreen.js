@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
 
-export default function SignUpScreen({ navigation }){
+
+export default function SignInScreen({ navigation }){
 
     return(
         <View style={styles.container}>
@@ -15,14 +16,14 @@ export default function SignUpScreen({ navigation }){
                 <View style={styles.google}>
                 
                 <Text style={styles.googletext}> 
-                 Sign up with Google</Text>
+                 Sign in with Google</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.applebtn} >
-                <Text style={styles.appletext}> Sign up with Apple</Text>
+                <Text style={styles.appletext}> Sign in with Apple</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.signin}>
-                <Text style={styles.signinText} onPress={() => navigation.navigate('SignUpFormEmail')}>Sign up with E-mail</Text>
+                <Text style={styles.signinText} onPress={() => navigation.navigate('SignIn')}>Sign In with E-mail</Text>
             </TouchableOpacity>
 
         </View>
