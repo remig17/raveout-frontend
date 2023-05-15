@@ -1,15 +1,42 @@
-import { View, Text, Button } from "react-native"
+import { View, Text, Button, TouchableOpacity, StyleSheet, Image} from "react-native"
 
-export default function PreferenceScreen({ navigation }){
+export default function SignUpSignInScreen({ navigation }){
 
     return(
-        <View>
-            <Text>Preference Screen</Text>
+        <View style={styles.container}>
 
-            <Button
-       title="Go to Home"
-       onPress={() => navigation.navigate('Home')}
-     />
+        <Image source={require('../assets/logo1.png') } style={styles.logo}></Image>
+
+        <View style={styles.imgContainer}>
+            <TouchableOpacity style={styles.signup}>
+                <Text style={styles.signupText}>Sign Up</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.signin}>
+                <Text style={styles.signinText}>Sign In</Text>
+            </TouchableOpacity>
+
+        </View>
+           
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#262626',
+      alignItems: 'center', 
+      justifyContent: 'center',
+    },
+    imgContainer: {
+        color: 'white',
+    },
+    signupText: {
+        color: 'white',
+    },
+    signinText: {
+        color: 'white',
+    }
+  });
+
+   
