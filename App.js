@@ -8,6 +8,7 @@ import  SignUpScreen  from './screens/SignUpScreen';
 import SignUpSignInScreen from './screens/SignUpSignInScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpFormEmailScreen from './screens/SignUpFormEmailScreen';
+import SignInFormEmailScreen from './screens/SignInFormEmailScreen';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -42,6 +43,7 @@ export default function App() {
       <Stack.Screen name="SignUpSignIn" component={SignUpSignInScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignUpFormEmail" component={SignUpFormEmailScreen} />
+      <Stack.Screen name="SignInFormEmail" component={SignInFormEmailScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   </Provider>

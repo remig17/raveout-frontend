@@ -2,30 +2,27 @@ import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingVi
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../reducers/user';
-export default function SignUpFormEmailScreen({navigation}){
+export default function SignInFormEmailScreen({navigation}){
 
     const dispatch = useDispatch();
 	const user = useSelector((state) => state.user.value);
-    const [signUpPseudo, setSignUpPseudo] = useState('');
-    const [signUpEmail, setSignUpEmail] = useState('');
-	const [signUpPassword, setSignUpPassword] = useState('');
+    const [signInEmail, setsignInEmail] = useState('');
+	const [signInPassword, setsignInPassword] = useState('');
 
-    console.log("check1", signUpPseudo)
 
     const handleRegister = () => {
-		fetch('http://10.2.2.38:3000/users/signup', {
+		fetch('http://10.2.2.38:3000/users/signin', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ pseudo: signUpPseudo, password: signUpPassword, email: signUpEmail }),
+			body: JSON.stringify({ password: signInPassword, email: signInEmail }),
 		}).then(response => response.json())
 			.then(data => {
 
                 console.log("checkData", data)
 				if (data.result) {
-					dispatch(login({ pseudo: signUpPseudo, token: data.token, email: signUpEmail }));
-					setSignUpPseudo('');
-                    setSignUpEmail('');
-					setSignUpPassword('');
+					dispatch(login({ token: data.token, email: signInEmail }));
+                    setsignInEmail('');
+					setsignInPassword('');
                     navigation.navigate('Home')
                 
 				}
@@ -35,14 +32,13 @@ export default function SignUpFormEmailScreen({navigation}){
     return( 
         <SafeAreaView style={styles.all}>
         <KeyboardAvoidingView style={styles.main} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <Text style={styles.title}>Sign Up</Text>
+        <Text style={styles.title}>Sign In</Text>
 
             <View style={styles.form}>
-                <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) =>setSignUpPseudo(value) } value={signUpPseudo}></TextInput>
-                <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setSignUpEmail(value)} value={signUpEmail}></TextInput>
-                <TextInput style={styles.input} placeholder="Password" onChangeText={(value) => setSignUpPassword(value)} value={signUpPassword}></TextInput>
-                <TouchableOpacity style={styles.signup}>
-                <Text style={styles.signupText} onPress={() => {handleRegister()}}>Sign up</Text>
+                <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setsignInEmail(value)} value={signInEmail}></TextInput>
+                <TextInput style={styles.input} placeholder="Password" onChangeText={(value) => setsignInPassword(value)} value={signInPassword}></TextInput>
+                <TouchableOpacity style={styles.signin}>
+                <Text style={styles.signinText} onPress={() => {handleRegister()}}>Sign in</Text>
             </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -74,25 +70,23 @@ const styles = StyleSheet.create({
     form: {
         flex: 1,
         alignItems: 'center',
-        
+        width:'100%', 
     },
     input: {
         flex: 1,
         backgroundColor: "#F2F3F3",
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '80%',
-        height: 10,
+        height: '10%',
         marginBottom: 10,
         borderRadius: 5,
     },
-    signup: {
+    signin: {
         padding: 15,
         width: 330,
         backgroundColor: '#7C4DFF',
         borderRadius: '10%',
     },
-    signupText: {
+    signinText: {
         color: 'white',
         fontFamily: 'PoppinsBold',
         textAlign: 'center',
