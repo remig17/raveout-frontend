@@ -26,7 +26,7 @@ export default function SignUpFormEmailScreen({navigation}){
 					setSignUpPseudo('');
                     setSignUpEmail('');
 					setSignUpPassword('');
-                    navigation.navigate('Home')
+                    navigation.navigate('Preference')
                 
 				}
 			});

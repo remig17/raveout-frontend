@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  HomeScreen  from './screens/HomeScreen';
 import  PreferenceScreen  from './screens/PreferenceScreen';
-import LoginScreen  from './screens/LoginScreen';
 import  SignUpScreen  from './screens/SignUpScreen';
 import SignUpSignInScreen from './screens/SignUpSignInScreen';
 import SignInScreen from './screens/SignInScreen';
@@ -38,7 +37,6 @@ export default function App() {
     <Stack.Navigator screenOptions={{ headerShown: false }} style={styles.container}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Preference" component={PreferenceScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="SignUpSignIn" component={SignUpSignInScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />

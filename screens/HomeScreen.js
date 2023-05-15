@@ -9,10 +9,7 @@ import { Text, View, Button, StyleSheet } from 'react-native';
           title="Preferences"
           onPress={() => navigation.navigate('Preference')}
         />
-         <Button
-          title="Login"
-          onPress={() => navigation.navigate('Login')}
-        />
+        
          <Button
           title="SignUp"
           onPress={() => navigation.navigate('SignUp')}
