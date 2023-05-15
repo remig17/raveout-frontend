@@ -14,7 +14,6 @@ import { addTags } from '../reducers/user';
 export default function PreferenceScreen({ navigation }) {
 
   const [selectedButtons, setSelectedButtons] = useState([]);
-  const [token, setToken] = useState("");
   const dispatch = useDispatch();
 
   const handleButtonPress = (style) => {
@@ -122,6 +121,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingTop: 8,
     backgroundColor: "#262626",
+    borderRadius: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    marginTop: -15,
+  },
+  selectedButton: {
+    width: 300,
+    height: 40,
+    alignItems: "center",
+    marginTop: 20,
+    paddingTop: 8,
+    backgroundColor: "#7C4DFF",
     borderRadius: 10,
     borderColor: "white",
     borderWidth: 1,
