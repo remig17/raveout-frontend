@@ -9,9 +9,13 @@ import SignUpSignInScreen from './screens/SignUpSignInScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpFormEmailScreen from './screens/SignUpFormEmailScreen';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import user from './reducers/user';
 
-
-
+const store = configureStore({
+  reducer: {user},
+ });
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -27,6 +31,8 @@ export default function App() {
     return null;
   }
   return (
+    <Provider store={store}>
+
     <NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }} style={styles.container}>
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -38,6 +44,7 @@ export default function App() {
       <Stack.Screen name="SignUpFormEmail" component={SignUpFormEmailScreen} />
     </Stack.Navigator>
   </NavigationContainer>
+  </Provider>
   )
 }
 

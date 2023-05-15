@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, KeyboardAvoidingView, SafeAreaView } from "react-native"
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from '../reducers/user';
+import { login } from '../reducers/user';
 export default function SignUpFormEmailScreen({navigation}){
 
     const dispatch = useDispatch();
@@ -10,6 +10,8 @@ export default function SignUpFormEmailScreen({navigation}){
     const [signUpEmail, setSignUpEmail] = useState('');
 	const [signUpPassword, setSignUpPassword] = useState('');
 
+    console.log("check1", signUpPseudo)
+
     const handleRegister = () => {
 		fetch('http://10.2.2.38:3000/users/signup', {
 			method: 'POST',
@@ -17,12 +19,15 @@ export default function SignUpFormEmailScreen({navigation}){
 			body: JSON.stringify({ pseudo: signUpPseudo, password: signUpPassword, email: signUpEmail }),
 		}).then(response => response.json())
 			.then(data => {
+
+                console.log("checkData", data)
 				if (data.result) {
 					dispatch(login({ pseudo: signUpPseudo, token: data.token, email: signUpEmail }));
 					setSignUpPseudo('');
                     setSignUpEmail('');
 					setSignUpPassword('');
                     navigation.navigate('Home')
+                
 				}
 			});
 	};
@@ -33,9 +38,9 @@ export default function SignUpFormEmailScreen({navigation}){
         <Text style={styles.title}>Sign Up</Text>
 
             <View style={styles.form}>
-                <TextInput style={styles.input} placeholder="Pseudo" onChange={(e) => setSignUpPseudo(e.target.value)} value={signUpPseudo}></TextInput>
-                <TextInput style={styles.input} placeholder="Email" onChange={(e) => setSignUpEmail(e.target.value)} value={signUpEmail}></TextInput>
-                <TextInput style={styles.input} placeholder="Password" onChange={(e) => setSignUpPassword(e.target.value)} value={signUpPassword}></TextInput>
+                <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) =>setSignUpPseudo(value) } value={signUpPseudo}></TextInput>
+                <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setSignUpEmail(value)} value={signUpEmail}></TextInput>
+                <TextInput style={styles.input} placeholder="Password" onChangeText={(value) => setSignUpPassword(value)} value={signUpPassword}></TextInput>
                 <TouchableOpacity style={styles.signup}>
                 <Text style={styles.signupText} onPress={() => {handleRegister()}}>Sign up</Text>
             </TouchableOpacity>
