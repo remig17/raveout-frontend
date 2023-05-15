@@ -6,6 +6,8 @@ import PreferenceScreen from "./screens/PreferenceScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignUpSignInScreen from "./screens/SignUpSignInScreen";
+import SignInScreen from "./screens/SignInScreen";
+import SignUpFormEmailScreen from "./screens/SignUpFormEmailScreen";
 import { useFonts } from "expo-font";
 
 const Stack = createNativeStackNavigator();
@@ -32,6 +34,11 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="SignUpSignIn" component={SignUpSignInScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen
+          name="SignUpFormEmail"
+          component={SignUpFormEmailScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

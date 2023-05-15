@@ -21,6 +21,14 @@ import { Text, View, Button, StyleSheet } from 'react-native';
           title="SignUpSignIn"
           onPress={() => navigation.navigate('SignUpSignIn')}
         />
+        <Button
+          title="SignIn"
+          onPress={() => navigation.navigate('SignIn')}
+        />
+        <Button
+          title="SignUpFormEmail"
+          onPress={() => navigation.navigate('SignUpFormEmail')}
+        />
       </View>
     );
    }
