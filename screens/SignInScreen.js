@@ -1,7 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
+import { useState } from "react";
 
 
 export default function SignInScreen({ navigation }){
+
+
+    
+
 
     return(
         <View style={styles.container}>

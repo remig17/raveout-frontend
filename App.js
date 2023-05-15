@@ -3,13 +3,19 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import PreferenceScreen from "./screens/PreferenceScreen";
-import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignUpSignInScreen from "./screens/SignUpSignInScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpFormEmailScreen from "./screens/SignUpFormEmailScreen";
+import SignInFormEmailScreen from "./screens/SignInFormEmailScreen";
 import { useFonts } from "expo-font";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import user from "./reducers/user";
 
+const store = configureStore({
+  reducer: { user },
+});
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -24,23 +30,28 @@ export default function App() {
     return null;
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        style={styles.container}
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Preference" component={PreferenceScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="SignUpSignIn" component={SignUpSignInScreen} />
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen
-          name="SignUpFormEmail"
-          component={SignUpFormEmailScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          style={styles.container}
+        >
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Preference" component={PreferenceScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignUpSignIn" component={SignUpSignInScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen
+            name="SignUpFormEmail"
+            component={SignUpFormEmailScreen}
+          />
+          <Stack.Screen
+            name="SignInFormEmail"
+            component={SignInFormEmailScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
