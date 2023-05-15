@@ -31,11 +31,17 @@ const styles = StyleSheet.create({
     imgContainer: {
         color: 'white',
     },
+    signup: {
+        borderWidth: 'solid',
+        borderColor: 'gray',
+    },
     signupText: {
         color: 'white',
+        fontFamily: 'PoppinsBold',
     },
     signinText: {
         color: 'white',
+        fontFamily: 'PoppinsBold',
     }
   });
 
