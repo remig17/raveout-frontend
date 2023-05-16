@@ -1,19 +1,15 @@
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text,StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTags } from '../reducers/user';
 
 export default function PreferenceScreen({ navigation }) {
 
+
+  const user = useSelector((state) => state.user.value);
   const [selectedButtons, setSelectedButtons] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
 
   const handleButtonPress = (style) => {
@@ -23,23 +19,23 @@ export default function PreferenceScreen({ navigation }) {
       setSelectedButtons([...selectedButtons, style]);
     }
   };
+  console.log("reducer", user )
 
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = () => {
     if (selectedButtons.length === 3) {
       fetch("http://10.2.2.38:3000/users/musicUpdate", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token: token, tags: selectedButtons }),
+        body: JSON.stringify({ token: user.token, tags: selectedButtons }),
       })
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
-            dispatch(addTags({ tags: data.tags, token: token }));
-            navigation.navigate("Home");
+          dispatch(addTags({ tags: data.tags, token: user.token }));
+          navigation.navigate("Home");
           }
         });
     } else {

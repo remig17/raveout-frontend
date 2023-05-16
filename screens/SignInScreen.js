@@ -28,7 +28,7 @@ export default function SignInScreen({ navigation }){
                 <Text style={styles.appletext}> Sign in with Apple</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.signin}>
-                <Text style={styles.signinText} onPress={() => navigation.navigate('SignIn')}>Sign In with E-mail</Text>
+                <Text style={styles.signinText} onPress={() => navigation.navigate('SignInFormEmail')}>Sign In with E-mail</Text>
             </TouchableOpacity>
 
         </View>
