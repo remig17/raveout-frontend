@@ -33,14 +33,18 @@ export default function PreferenceScreen({ navigation }) {
       })
         .then((response) => response.json())
         .then((data) => {
+         
           if (data.result) {
-          dispatch(addTags({ tags: data.tags, token: user.token }));
+          dispatch(addTags(selectedButtons));
           navigation.navigate("Home");
+
+          }
+          else {
+            setErrorMessage("Veuillez sélectionner exactement trois styles.");
           }
         });
-    } else {
-      setErrorMessage("Veuillez sélectionner exactement trois styles.");
-    }
+    } 
+    
   };
   
   
