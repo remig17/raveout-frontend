@@ -1,9 +1,12 @@
 import { Text, View, Button, StyleSheet } from 'react-native';
-
+import NavbarScreen from './NavbarScreen';
 
   export default function HomeScreen({ navigation }) {
     return (
       <View style={styles.main}>
+        <NavbarScreen>
+          
+        </NavbarScreen>
         <Text>Home Screen</Text>
         <Button
           title="Preferences"
@@ -37,7 +40,7 @@ import { Text, View, Button, StyleSheet } from 'react-native';
    const styles = StyleSheet.create({
     main: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
     },

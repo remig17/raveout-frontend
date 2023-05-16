@@ -23,7 +23,7 @@ export default function SignInFormEmailScreen({navigation}){
 					dispatch(login({ token: data.token, email: signInEmail }));
                     setsignInEmail('');
 					setsignInPassword('');
-                    navigation.navigate('Home')
+                    navigation.navigate('TabNavigator')
                 
 				}
 			});
