@@ -52,29 +52,29 @@ export default function PreferenceScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Choisir vos 3 styles favoris :</Text>
       <View style={styles.stylesContainer}>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Jungle/Drum'n Bass") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Jungle/Drum'n Bass")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Jungle/Drum'n Bass") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Jungle/Drum'n Bass")}>
           <Text style={styles.styleTxt}>Jungle/Drum'n Bass</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Breakbeat") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Breakbeat")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Breakbeat") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Breakbeat")}>
           <Text style={styles.styleTxt}>Breakbeat</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Bass Music") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Bass Music")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Bass Music") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Bass Music")}>
           <Text style={styles.styleTxt}>Bass Music</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Trance") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Trance")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Trance") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Trance")}>
           <Text style={styles.styleTxt}>Trance</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Techno") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Techno")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Techno") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Techno")}>
           <Text style={styles.styleTxt}>Techno</Text>
       </TouchableOpacity>
-       <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("House") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("House")}>
+       <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("House") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("House")}>
           <Text style={styles.styleTxt}>House</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Experimental") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Experimental")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Experimental") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Experimental")}>
           <Text style={styles.styleTxt}>Experimental</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Hard Music") && {backgroundColor: "#44BBA4" }, ]} onPress={() => handleButtonPress("Hard Music")}>
+      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Hard Music") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Hard Music")}>
           <Text style={styles.styleTxt}>Hard Music</Text>
       </TouchableOpacity>
         <TouchableOpacity style={styles.validerBtn} onPress={() => {handleSubmit()}}>
