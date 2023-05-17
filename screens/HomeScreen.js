@@ -1,36 +1,34 @@
 import { Text, View, Button, StyleSheet } from "react-native";
-import { Card } from "../components/Card";
+import Card from "../components/Card";
 import { useEffect, useState } from "react";
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
+
   useEffect(() => {
-    fetch("http://10.2.1.35:3000/showAllEvent")
+    fetch("http://10.2.1.35:3000/events/showAllEvent")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setEventsData(formatedData);
+        console.log("data fetch", data.event);
+        setEventsData(data.event);
       });
   }, []);
 
   const events = eventsData.map((data, i) => {
-    // const isLiked = likedMovies.some(movie => movie === data.title);
     return (
       <Card
         key={i}
-        /*updateLikedEvents={updateLikedEvents} isLiked={isLiked}*/
         image={data.image}
         name={data.name}
         lieu={data.lieu}
         date_debut={data.date_debut}
-        tag={data.tag}
+        tag={data.tags}
       />
     );
   });
   return (
     <View style={styles.main}>
       <Text>Home Screen</Text>
-      <View>{events}</View>
       <Button
         title="Preferences"
         onPress={() => navigation.navigate("Preference")}
@@ -50,6 +48,7 @@ export default function HomeScreen({ navigation }) {
         title="SignInFormEmail"
         onPress={() => navigation.navigate("SignInFormEmail")}
       />
+      <View>{events}</View>
     </View>
   );
 }
