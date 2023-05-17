@@ -2,8 +2,6 @@ import { Text, View, Button, StyleSheet, ScrollView } from "react-native";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
-import { removeEventFromLike, addEventToLike } from "../reducers/user";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen({ navigation }) {
@@ -12,7 +10,7 @@ export default function HomeScreen({ navigation }) {
   
 
   useEffect(() => {
-    fetch("http://10.2.2.38:3000/events/showAllEvent")
+    fetch("http://192.168.1.148:3000/events/showAllEvent")
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
@@ -28,7 +26,6 @@ export default function HomeScreen({ navigation }) {
         lieu={data.lieu}
         date_debut={data.date_debut}
         tag={data.tags}
-        updateLikedEvents={updateLikedEvents}
       />
     );
   });

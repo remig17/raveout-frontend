@@ -24,7 +24,7 @@ export default function PreferenceScreen({ navigation }) {
 
   const handleSubmit = () => {
     if (selectedButtons.length === 3) {
-      fetch("http://10.2.2.38:3000/users/musicUpdate", {
+      fetch("http://192.168.1.148/users/musicUpdate", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

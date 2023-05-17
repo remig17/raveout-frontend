@@ -24,16 +24,9 @@ export const userSlice = createSlice({
       state.value.tags = action.payload;
       
     },
-    addEventToLike: (state, action) => {
-      state.likedEvents.push(action.payload);
-    },
-    removeEventFromLike: (state, action) => {
-      state.likedEvents = state.likedEvents.filter(
-        (event) => event.name !== action.payload.name
-      );
-    },
+   
   },
 });
 
-export const { login, logout, addTags, addEventToLike, removeEventFromLike } = userSlice.actions;
+export const { login, logout, addTags } = userSlice.actions;
 export default userSlice.reducer;
