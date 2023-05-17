@@ -1,5 +1,5 @@
 import { Text, View, Button, StyleSheet } from "react-native";
-import { Card } from "./components/Card";
+import { Card } from "../components/Card";
 import { useEffect, useState } from "react";
 
 export default function HomeScreen({ navigation }) {

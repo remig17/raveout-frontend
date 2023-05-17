@@ -1,4 +1,4 @@
-import { View, Image, Stylesheet, Text, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 export default function Card(props) {
@@ -29,7 +29,10 @@ export default function Card(props) {
 }
 
 const styles = StyleSheet.create({
-  card: {},
+  card: {
+    flex: 1,
+    width: "100%",
+  },
   imgContainer: {},
   image: {},
   descriptioncontainer: {},
