@@ -3,12 +3,12 @@ import { Text, SafeAreaView, TouchableOpacity, StyleSheet, Image, View } from 'r
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
-export default function MapScreen(){
+export default function TicketScreen(){
 
 
     return(
         <View style={styles.main}>
-            <Text style={styles.text}>MapScreen</Text>
+            <Text style={styles.text}>TicketScreen</Text>
         </View>
 
     )

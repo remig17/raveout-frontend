@@ -1,19 +1,20 @@
 import { Text, View, Button, StyleSheet } from 'react-native';
 import NavbarScreen from './NavbarScreen';
 
-  export default function HomeScreen({ navigation }) {
-    return (
-      <View style={styles.main}>
-        <NavbarScreen>
-          
-        </NavbarScreen>
-        <Text>Home Screen</Text>
+export default function HomeScreen({ navigation }) {
+
+ 
+
+
+  return (
+    <View style={styles.container}>
+      <NavbarScreen style={styles.navbar}/>
+      <View style={styles.content}>
         <Button
           title="Preferences"
           onPress={() => navigation.navigate('Preference')}
         />
-        
-         <Button
+        <Button
           title="SignUp"
           onPress={() => navigation.navigate('SignUp')}
         />
@@ -34,14 +35,19 @@ import NavbarScreen from './NavbarScreen';
           onPress={() => navigation.navigate('SignInFormEmail')}
         />
       </View>
-    );
-   }
+    </View>
+  );
+}
 
-   const styles = StyleSheet.create({
-    main: {
-      flex: 1,
-      backgroundColor: 'black',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  }); 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  content: {
+  flex: 1,
+  justifyContent: 'center',
+  backgroundColor: '#262626',
+  },
+  
+});
