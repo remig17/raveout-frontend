@@ -22,11 +22,8 @@ export default function NavbarScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+  
   navbar: {
-    flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'evenly',

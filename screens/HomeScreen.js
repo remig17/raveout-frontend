@@ -1,10 +1,20 @@
-import { Text, View, Button, StyleSheet } from "react-native";
+import { Text, View, Button, StyleSheet, ScrollView } from "react-native";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
+  const [likedEvents, setLikedEvents] = useState([]);
+
+  const updateLikedEvents = (eventTitle) => {
+    if (likedEvents.find((event) => event === eventTitle)) {
+      setLikedEvents(likedEvents.filter((event) => event !== eventTitle));
+    } else {
+      setLikedEvents([...likedEvents, eventTitle]);
+    }
+  };
 
   useEffect(() => {
     fetch("http://10.2.1.35:3000/events/showAllEvent")
@@ -19,39 +29,25 @@ export default function HomeScreen({ navigation }) {
     return (
       <Card
         key={i}
-        image={data.image}
+        photo={data.photo}
         name={data.name}
         lieu={data.lieu}
         date_debut={data.date_debut}
         tag={data.tags}
+        updateLikedEvents={updateLikedEvents}
       />
     );
   });
-  return (
-    <View style={styles.main}>
-      <NavbarScreen style={styles.navbar} />
-      <Text>Home Screen</Text>
-      <Button
-        title="Preferences"
-        onPress={() => navigation.navigate("Preference")}
-      />
 
-      <Button title="SignUp" onPress={() => navigation.navigate("SignUp")} />
-      <Button
-        title="SignUpSignIn"
-        onPress={() => navigation.navigate("SignUpSignIn")}
-      />
-      <Button title="SignIn" onPress={() => navigation.navigate("SignIn")} />
-      <Button
-        title="SignUpFormEmail"
-        onPress={() => navigation.navigate("SignUpFormEmail")}
-      />
-      <Button
-        title="SignInFormEmail"
-        onPress={() => navigation.navigate("SignInFormEmail")}
-      />
-      <View>{events}</View>
-    </View>
+  return (
+    <>
+      <NavbarScreen style={styles.navbar}></NavbarScreen>
+      <SafeAreaView>
+        <ScrollView>
+          <View style={styles.main}>{events}</View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
 
