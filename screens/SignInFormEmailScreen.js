@@ -36,7 +36,7 @@ export default function SignInFormEmailScreen({navigation}){
 
             <View style={styles.form}>
                 <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setsignInEmail(value)} value={signInEmail}></TextInput>
-                <TextInput style={styles.input} placeholder="Password" onChangeText={(value) => setsignInPassword(value)} value={signInPassword}></TextInput>
+                <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} onChangeText={(value) => setsignInPassword(value)} value={signInPassword}></TextInput>
                 <TouchableOpacity style={styles.signin}>
                 <Text style={styles.signinText} onPress={() => {handleRegister()}}>Sign in</Text>
             </TouchableOpacity>

@@ -15,9 +15,14 @@ export default function Card(props) {
         <Image style={styles.photo} source={{ uri: `${props.photo}` }}></Image>
       </View>
       <View style={styles.descriptioncontainer}>
-        <Text style={styles.name}>{props.name}</Text>
-        <Text style={styles.lieu}>{props.lieu}</Text>
-        <Text style={styles.datedebut}>{props.date_debut}</Text>
+      <Text style={styles.name}>{props.name}</Text>
+        <View>
+          
+          <View style={styles.heartcontainer}>
+        <View>
+          <Text style={styles.lieu}>{props.lieu}</Text>
+          <Text style={styles.datedebut}>{props.date_debut}</Text>
+        </View>
         <TouchableOpacity
           onPress={() => {
             handleLike();
@@ -30,6 +35,11 @@ export default function Card(props) {
             style={styles.likeIcon}
           />
         </TouchableOpacity>
+        </View>
+        </View>
+        
+        
+      
         <View style={styles.tagsContainer}>
           <TouchableOpacity style={styles.tag}>{props.tags}</TouchableOpacity>
         </View>
@@ -44,26 +54,45 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     alignContent: "center",
-    width: "100%",
-    height: "100%",
+    width: 350,
+    height: 200,
+    marginBottom: 50,
   },
   photocontainer: {
     width: "100%",
     height: "100%",
   },
   photo: {
-    resizeMode: "cover",
+    resizeMode: "contain",
     width: "100%",
     height: "100%",
   },
-  likeIcon: {},
+  likeIcon: {
+    marginRight: 10,
+  },
   descriptioncontainer: {
+    marginTop: 10,
+    backgroundColor: "#262626",
     justifyContent: "center",
     alignContent: "center",
   },
-  name: {},
-  lieu: {},
-  datedebut: {},
+  name: {
+    fontFamily: "PoppinsBold",
+    color: "white",
+    marginTop: 10,
+  },
+  lieu: {
+    color: "#9B9B9B",
+    fontFamily: "PoppinsRegular",
+  },
+  datedebut: {
+    color: "#9B9B9B",
+    fontFamily: "PoppinsRegular",
+  },
   tagsContainer: {},
   tag: {},
+  heartcontainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });

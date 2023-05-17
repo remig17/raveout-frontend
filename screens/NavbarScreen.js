@@ -15,7 +15,7 @@ export default function NavbarScreen() {
             <Image source={require('../assets/logo1.png')} style={styles.logo} />
         </View>
         <TouchableOpacity style={styles.heart} onPress={() => navigation.navigate('Like')}>
-            <FontAwesome name='heart' size={30} color='white'/>
+            <FontAwesome name='heart-o' size={30} color='white'/>
         </TouchableOpacity>
         </SafeAreaView>
   );

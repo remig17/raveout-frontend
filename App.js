@@ -16,13 +16,24 @@ import ProfileScreen from "./screens/ProfileScreen";
 import LikeScreen from "./screens/LikeScreen";
 import NavbarScreen from "./screens/NavbarScreen";
 import { useFonts } from "expo-font";
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 
+const reducers = combineReducers({ user });
+const persistConfig = { key: "raveout", storage: AsyncStorage };
+
 const store = configureStore({
-  reducer: { user },
+  reducer: persistReducer(persistConfig, reducers),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
+const persistor = persistStore(store);
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -85,6 +96,7 @@ export default function App() {
   }
   return (
     <Provider store={store}>
+      <PersistGate persistor={persistor}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }} style={styles.container}>
           
@@ -102,6 +114,7 @@ export default function App() {
          
         </Stack.Navigator>
       </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }

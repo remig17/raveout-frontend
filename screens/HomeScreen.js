@@ -17,10 +17,9 @@ export default function HomeScreen({ navigation }) {
   };
 
   useEffect(() => {
-    fetch("http://10.2.1.35:3000/events/showAllEvent")
+    fetch("http://10.2.2.38:3000/events/showAllEvent")
       .then((response) => response.json())
       .then((data) => {
-        console.log("data fetch", data.event);
         setEventsData(data.event);
       });
   }, []);
@@ -42,7 +41,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <NavbarScreen style={styles.navbar}></NavbarScreen>
-      <SafeAreaView>
+      <SafeAreaView style={styles.all}>
         <ScrollView>
           <View style={styles.main}>{events}</View>
         </ScrollView>
@@ -54,8 +53,11 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    backgroundColor: "#262626",
+        alignItems: "center",
     justifyContent: "center",
   },
+  all: {
+    backgroundColor: "#262626",
+  }
 });

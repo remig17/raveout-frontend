@@ -10,7 +10,6 @@ export default function SignUpFormEmailScreen({navigation}){
     const [signUpEmail, setSignUpEmail] = useState('');
 	const [signUpPassword, setSignUpPassword] = useState('');
 
-    console.log("check1", signUpPseudo)
 
     const handleRegister = () => {
 		fetch('http://10.2.2.38:3000/users/signup', {
@@ -20,7 +19,6 @@ export default function SignUpFormEmailScreen({navigation}){
 		}).then(response => response.json())
 			.then(data => {
 
-                console.log("checkData", data)
 				if (data.result) {
 					dispatch(login({ pseudo: signUpPseudo, token: data.token, email: signUpEmail }));
 					setSignUpPseudo('');
@@ -40,7 +38,7 @@ export default function SignUpFormEmailScreen({navigation}){
             <View style={styles.form}>
                 <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) =>setSignUpPseudo(value) } value={signUpPseudo}></TextInput>
                 <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setSignUpEmail(value)} value={signUpEmail}></TextInput>
-                <TextInput style={styles.input} placeholder="Password" onChangeText={(value) => setSignUpPassword(value)} value={signUpPassword}></TextInput>
+                <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} onChangeText={(value) => setSignUpPassword(value)} value={signUpPassword}></TextInput>
                 <TouchableOpacity style={styles.signup}>
                 <Text style={styles.signupText} onPress={() => {handleRegister()}}>Sign up</Text>
             </TouchableOpacity>
