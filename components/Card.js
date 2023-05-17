@@ -1,13 +1,37 @@
 import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Card(props) {
   const [isLiked, setIsLiked] = useState(false);
+  const [likedEvents, setLikedEvents] = useState([]);
+  const dispatch = useDispatch();
+
+  const updateLikedEvents = (eventTitle) => {
+    if (likedEvents.find((event) => event === eventTitle)) {
+      setLikedEvents(likedEvents.filter((event) => event !== eventTitle));
+      dispatch(removeEventFromLike(eventTitle))
+
+    } else {
+      setLikedEvents([...likedEvents, eventTitle]);
+      dispatch(addEventToLike(eventTitle))
+    }
+  };
 
   const handleLike = () => {
     setIsLiked(!isLiked);
-    props.updateLikedEvents(props.name); // Appeler la fonction parent pour mettre à jour les événements aimés
+    updateLikedEvents(props.name); // Appeler la fonction parent pour mettre à jour les événements aimés
+    
+      fetch('http://10.2.2.38:3000/events/showAllEvent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: user.token, eventName: props.name }),
+    }).then(response => response.json())
+      .then(data => {
+        data.result && dispatch(updateLikedEvents({ tweetId: props._id, name: event.name}));
+      });
+   
   };
   return (
     <View style={styles.card}>
