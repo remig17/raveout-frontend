@@ -17,7 +17,7 @@ export default function SignUpFormEmailScreen({ navigation }) {
   const [signUpPseudo, setSignUpPseudo] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
-
+  
   const handleRegister = () => {
     fetch(`http://${PORT}:3000/users/signup`, {
       method: "POST",

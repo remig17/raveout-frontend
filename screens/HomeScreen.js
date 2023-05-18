@@ -1,4 +1,4 @@
-import { Text, View, Button, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
@@ -21,6 +21,7 @@ export default function HomeScreen({ navigation }) {
   const events = eventsData.map((data, i) => {
     console.log("checkEventsdata", data);
     return (
+      
       <Card
         key={i}
         photo={data.photo}
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
   },
   all: {
     backgroundColor: "#262626",
+    marginBottom: 100,
   },
   intro: {
     fontFamily: "PoppinsBold",

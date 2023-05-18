@@ -9,7 +9,7 @@ export default function Card(props) {
   const [isLiked, setIsLiked] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-
+  
   const updateLikedEvents = () => {
     if (isLiked) {
       dispatch(removeEventFromLike(props._id));

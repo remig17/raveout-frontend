@@ -4,24 +4,28 @@ import CardLike from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeEventFromLike } from "../reducers/event";
 
 export default function LikeScreen({ navigation }) {
   const [likesData, setLikesData] = useState([]);
   const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("aaaa",data)
-
         setLikesData(data.like);
       });
   }, []);
 
+  const handleUnlike = (eventId) => {
+    dispatch(removeEventFromLike(eventId));
+    setLikesData(likesData.filter((event) => event._id !== eventId));
+  };
+
   const likes = likesData.map((data, i) => {
-    console.log("checkLikesdata", data);
     return (
       <CardLike
         key={i}
@@ -31,6 +35,7 @@ export default function LikeScreen({ navigation }) {
         date_debut={data.date_debut}
         tag={data.tags}
         _id={data._id}
+        onUnlike={handleUnlike}
       />
     );
   });
@@ -57,6 +62,7 @@ const styles = StyleSheet.create({
   },
   all: {
     backgroundColor: "#262626",
+    marginBottom: 100,
   },
   intro: {
     fontFamily: "PoppinsBold",

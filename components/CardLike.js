@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 
-export default function Card(props) {
+export default function CardLike(props) {
   const [isLiked, setIsLiked] = useState(true); // Par défaut, le cœur est rempli
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -34,9 +34,11 @@ export default function Card(props) {
       });
   };
 
-  useEffect(() => {
-    setIsLiked(true); // Réinitialiser l'état du like lorsque les props changent
-  }, [props]);
+  const handleUnlike = () => {
+    setIsLiked(true); // Rétablir l'état du like à "aimé"
+    updateLikedEvents();
+    props.onUnlike(props._id); // Appeler la fonction de gestion de dé-like du parent
+  };
 
   return (
     <View style={styles.card}>
@@ -51,7 +53,7 @@ export default function Card(props) {
               <Text style={styles.lieu}>{props.lieu}</Text>
               <Text style={styles.datedebut}>{props.date_debut}</Text>
             </View>
-            <TouchableOpacity onPress={handleLike}>
+            <TouchableOpacity onPress={isLiked ? handleUnlike : handleLike}>
               <FontAwesome
                 name={isLiked ? "heart" : "heart-o"} // Utiliser un cœur rempli ou vide en fonction de l'état du like
                 size={20}
