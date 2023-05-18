@@ -10,7 +10,7 @@ export default function HomeScreen({ navigation }) {
   
 
   useEffect(() => {
-    fetch("http://192.168.1.148:3000/events/showAllEvent")
+    fetch("http://10.2.2.38:3000/events/showAllEvent")
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
@@ -18,14 +18,17 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
+    console.log("checkEventsdata",data)
     return (
       <Card
         key={i}
+        
         photo={data.photo}
         name={data.name}
         lieu={data.lieu}
         date_debut={data.date_debut}
         tag={data.tags}
+        _id={data._id}
       />
     );
   });
@@ -35,6 +38,7 @@ export default function HomeScreen({ navigation }) {
       <NavbarScreen style={styles.navbar}></NavbarScreen>
       <SafeAreaView style={styles.all}>
         <ScrollView>
+          <Text style={styles.intro}>A VENIR: </Text>
           <View style={styles.main}>{events}</View>
         </ScrollView>
       </SafeAreaView>
@@ -51,5 +55,12 @@ const styles = StyleSheet.create({
   },
   all: {
     backgroundColor: "#262626",
+  },
+  intro: {
+    fontFamily: 'PoppinsBold',
+    fontSize: 20,
+    color: "white",
+    marginBottom: 40,
+    marginLeft: 12,
   }
 });

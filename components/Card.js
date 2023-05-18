@@ -19,17 +19,19 @@ export default function Card(props) {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
-    updateLikedEvents();
-
-    fetch('http://192.168.1.148:3000/events/like', {
+    console.log("check111", user.token)
+    console.log("check222", props._id)
+    fetch('http://10.2.2.38:3000/users/like', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: user.token, eventId: props._id }),
     })
       .then(response => response.json())
       .then(data => {
-        data.result && dispatch(updateLikedEvents({ name: data.name }));
-      });
+       if(data.result){
+        updateLikedEvents();
+       }
+ });
   };
   return (
     <View style={styles.card}>

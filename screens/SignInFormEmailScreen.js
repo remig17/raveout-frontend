@@ -11,7 +11,7 @@ export default function SignInFormEmailScreen({navigation}){
 
 
     const handleRegister = () => {
-		fetch('http://192.168.1.148:3000/users/signin', {
+		fetch('http://10.2.2.38:3000/users/signin', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ password: signInPassword, email: signInEmail }),

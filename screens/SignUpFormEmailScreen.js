@@ -12,7 +12,7 @@ export default function SignUpFormEmailScreen({navigation}){
 
 
     const handleRegister = () => {
-		fetch('http://192.168.1.148/users/signup', {
+		fetch('http://10.2.2.38/users/signup', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ pseudo: signUpPseudo, password: signUpPassword, email: signUpEmail }),
