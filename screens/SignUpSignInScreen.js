@@ -10,15 +10,14 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function SignUpSignInScreen({ navigation }) {
-
   const user = useSelector((state) => state.user.value);
   // Redirect to / if not logged in
   console.log("reducer user", user.token);
 
   useEffect(() => {
     if (user.token) {
-      navigation.navigate('TabNavigator');
-        }
+      navigation.navigate("TabNavigator");
+    }
   }, [user.token, navigation]);
 
   return (

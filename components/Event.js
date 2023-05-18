@@ -22,6 +22,7 @@ export default function Card(props) {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
+
     fetch(`http://${PORT}:3000/users/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
