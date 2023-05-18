@@ -3,14 +3,13 @@ import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { PORT } from "@env";
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
 
-  
-
   useEffect(() => {
-    fetch("http://10.2.2.38:3000/events/showAllEvent")
+    fetch(`http://${PORT}:3000/events/showAllEvent`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
@@ -18,7 +17,7 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
-    console.log("checkEventsdata",data)
+    console.log("checkEventsdata", data);
     return (
       <Card
         key={i}
@@ -49,17 +48,17 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: "#262626",
-        alignItems: "center",
+    alignItems: "center",
     justifyContent: "center",
   },
   all: {
     backgroundColor: "#262626",
   },
   intro: {
-    fontFamily: 'PoppinsBold',
+    fontFamily: "PoppinsBold",
     fontSize: 20,
     color: "white",
     marginBottom: 40,
     marginLeft: 12,
-  }
+  },
 });

@@ -1,7 +1,8 @@
 import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { useState} from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 
 export default function Card(props) {
@@ -19,19 +20,19 @@ export default function Card(props) {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
-    console.log("check111", user.token)
-    console.log("check222", props._id)
-    fetch('http://10.2.2.38:3000/users/like', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+    console.log("check111", user.token);
+    console.log("check222", props._id);
+    fetch(`http://${PORT}:3000/users/like`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, eventId: props._id }),
     })
-      .then(response => response.json())
-      .then(data => {
-       if(data.result){
-        updateLikedEvents();
-       }
- });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          updateLikedEvents();
+        }
+      });
   };
   return (
     <View style={styles.card}>
