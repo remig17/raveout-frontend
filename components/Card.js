@@ -3,35 +3,35 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
+import { addEventToLike, removeEventFromLike } from "../reducers/event";
 
 export default function Card(props) {
   const [isLiked, setIsLiked] = useState(false);
-  const [likedEvents, setLikedEvents] = useState([]);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
 
-  const updateLikedEvents = (eventTitle) => {
-    if (likedEvents.find((event) => event === eventTitle)) {
-      setLikedEvents(likedEvents.filter((event) => event !== eventTitle));
-      dispatch(removeEventFromLike(eventTitle));
+  const updateLikedEvents = () => {
+    if (isLiked) {
+      dispatch(removeEventFromLike(props._id));
     } else {
-      setLikedEvents([...likedEvents, eventTitle]);
-      dispatch(addEventToLike(eventTitle));
+      dispatch(addEventToLike(props));
     }
   };
 
   const handleLike = () => {
     setIsLiked(!isLiked);
-    updateLikedEvents(props.name); // Appeler la fonction parent pour mettre à jour les événements aimés
-
-    fetch(`http://${PORT}:3000/events/showAllEvent`, {
-      method: "POST",
+    console.log("check111", user.token);
+    console.log("check222", props._id);
+    fetch(`http://${PORT}:3000/users/like`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token, eventName: props.name }),
+      body: JSON.stringify({ token: user.token, eventId: props._id }),
     })
       .then((response) => response.json())
       .then((data) => {
-        data.result &&
-          dispatch(updateLikedEvents({ tweetId: props._id, name: event.name }));
+        if (data.result) {
+          updateLikedEvents();
+        }
       });
   };
   return (
@@ -61,7 +61,6 @@ export default function Card(props) {
             </TouchableOpacity>
           </View>
         </View>
-
         <View style={styles.tagsContainer}>
           <TouchableOpacity style={styles.tag}>{props.tags}</TouchableOpacity>
         </View>
@@ -69,7 +68,6 @@ export default function Card(props) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   card: {
     flex: 1,

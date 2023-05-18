@@ -2,8 +2,6 @@ import { Text, View, Button, StyleSheet, ScrollView } from "react-native";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { removeEventFromLike, addEventToLike } from "../reducers/user";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 
@@ -19,6 +17,7 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
+    console.log("checkEventsdata", data);
     return (
       <Card
         key={i}
@@ -27,7 +26,7 @@ export default function HomeScreen({ navigation }) {
         lieu={data.lieu}
         date_debut={data.date_debut}
         tag={data.tags}
-        // updateLikedEvents={updateLikedEvents}
+        _id={data._id}
       />
     );
   });
@@ -37,6 +36,7 @@ export default function HomeScreen({ navigation }) {
       <NavbarScreen style={styles.navbar}></NavbarScreen>
       <SafeAreaView style={styles.all}>
         <ScrollView>
+          <Text style={styles.intro}>A VENIR: </Text>
           <View style={styles.main}>{events}</View>
         </ScrollView>
       </SafeAreaView>
@@ -53,5 +53,12 @@ const styles = StyleSheet.create({
   },
   all: {
     backgroundColor: "#262626",
+  },
+  intro: {
+    fontFamily: "PoppinsBold",
+    fontSize: 20,
+    color: "white",
+    marginBottom: 40,
+    marginLeft: 12,
   },
 });
