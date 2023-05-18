@@ -11,10 +11,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
 import { PORT } from "@env";
-console.log(PORT);
+
 export default function SignUpFormEmailScreen({ navigation }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
   const [signUpPseudo, setSignUpPseudo] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
@@ -31,6 +30,9 @@ export default function SignUpFormEmailScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("'''", data)
+        console.log("'''", data.token)
+
         if (data.result) {
           dispatch(
             login({

@@ -21,16 +21,18 @@ export default function PreferenceScreen({ navigation }) {
   console.log("reducer", user);
 
   const handleSubmit = () => {
+    console.log("click")
+    console.log("ggg", selectedButtons.length)
     if (selectedButtons.length === 3) {
-      fetch(`http://${PORT}/users/musicUpdate`, {
+
+      fetch(`http://${PORT}:3000/users/musicUpdate`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token: user.token, tags: selectedButtons }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(/* { token: user.token, tags: selectedButtons } */),
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data)
           if (data.result) {
             dispatch(addTags(selectedButtons));
             navigation.navigate("Home");
