@@ -22,7 +22,6 @@ export default function HomeScreen({ navigation }) {
     return (
       <Card
         key={i}
-        
         photo={data.photo}
         name={data.name}
         lieu={data.lieu}
