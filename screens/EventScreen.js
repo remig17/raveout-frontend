@@ -12,7 +12,7 @@ export default function EventScreen() {
   console.log("reducer event", event);
 
   useEffect(() => {
-    fetch(`http://${PORT}:3000/events/showAllEvent`)
+    fetch(`http://${PORT}:3000/events/showEventById/:6464c645a65a8d374cdb8414`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
