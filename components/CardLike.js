@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 
-export default function Card(props) {
-  const [isLiked, setIsLiked] = useState(false);
+export default function CardLike(props) {
+  const [isLiked, setIsLiked] = useState(true); // Par défaut, le cœur est rempli
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  
+
   const updateLikedEvents = () => {
     if (isLiked) {
       dispatch(removeEventFromLike(props._id));
@@ -19,8 +19,8 @@ export default function Card(props) {
   };
 
   const handleLike = () => {
-    setIsLiked(!isLiked);
-   
+    setIsLiked(!isLiked); // Inverser l'état du like
+
     fetch(`http://${PORT}:3000/users/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -33,6 +33,13 @@ export default function Card(props) {
         }
       });
   };
+
+  const handleUnlike = () => {
+    setIsLiked(true); // Rétablir l'état du like à "aimé"
+    updateLikedEvents();
+    props.onUnlike(props._id); // Appeler la fonction de gestion de dé-like du parent
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.photocontainer}>
@@ -46,15 +53,11 @@ export default function Card(props) {
               <Text style={styles.lieu}>{props.lieu}</Text>
               <Text style={styles.datedebut}>{props.date_debut}</Text>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                handleLike();
-              }}
-            >
+            <TouchableOpacity onPress={isLiked ? handleUnlike : handleLike}>
               <FontAwesome
                 name={isLiked ? "heart" : "heart-o"} // Utiliser un cœur rempli ou vide en fonction de l'état du like
                 size={20}
-                color={"#7C4DFF"} // Utiliser une couleur différente pour le like aimé ou non aimé
+                color={isLiked ? "#7C4DFF" : "#9B9B9B"} // Utiliser une couleur différente pour le like aimé ou non aimé
                 style={styles.likeIcon}
               />
             </TouchableOpacity>
