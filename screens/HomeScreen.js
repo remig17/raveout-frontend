@@ -4,9 +4,12 @@ import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
+  const event = useSelector((state) => state.event.value);
+  console.log("reducer event", event);
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
