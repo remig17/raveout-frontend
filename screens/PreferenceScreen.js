@@ -1,12 +1,11 @@
-import { View, Text,StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTags } from '../reducers/user';
+import { addTags } from "../reducers/user";
+import { PORT } from "@env";
 
 export default function PreferenceScreen({ navigation }) {
-
-
   const user = useSelector((state) => state.user.value);
   const [selectedButtons, setSelectedButtons] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,12 +18,11 @@ export default function PreferenceScreen({ navigation }) {
       setSelectedButtons([...selectedButtons, style]);
     }
   };
-  console.log("reducer", user )
-
+  console.log("reducer", user);
 
   const handleSubmit = () => {
     if (selectedButtons.length === 3) {
-      fetch("http://10.2.2.38:3000/users/musicUpdate", {
+      fetch(`http://${PORT}:3000/users/musicUpdate`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -33,62 +31,120 @@ export default function PreferenceScreen({ navigation }) {
       })
         .then((response) => response.json())
         .then((data) => {
-         
           if (data.result) {
-          dispatch(addTags(selectedButtons));
-          navigation.navigate("Home");
-
-          }
-          else {
+            dispatch(addTags(selectedButtons));
+            navigation.navigate("Home");
+          } else {
             setErrorMessage("Veuillez sélectionner exactement trois styles.");
           }
         });
-    } 
-    
+    }
   };
-  
-  
-    
-  
-
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Choisir vos 3 styles favoris :</Text>
       <View style={styles.stylesContainer}>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Jungle/Drum'n Bass") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Jungle/Drum'n Bass")}>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Jungle/Drum'n Bass") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Jungle/Drum'n Bass")}
+        >
           <Text style={styles.styleTxt}>Jungle/Drum'n Bass</Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Breakbeat") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Breakbeat")}>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Breakbeat") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Breakbeat")}
+        >
           <Text style={styles.styleTxt}>Breakbeat</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Bass Music") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Bass Music")}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Bass Music") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Bass Music")}
+        >
           <Text style={styles.styleTxt}>Bass Music</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Trance") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Trance")}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Trance") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Trance")}
+        >
           <Text style={styles.styleTxt}>Trance</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Techno") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Techno")}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Techno") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Techno")}
+        >
           <Text style={styles.styleTxt}>Techno</Text>
-      </TouchableOpacity>
-       <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("House") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("House")}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("House") && { backgroundColor: "#7C4DFF" },
+          ]}
+          onPress={() => handleButtonPress("House")}
+        >
           <Text style={styles.styleTxt}>House</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Experimental") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Experimental")}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Experimental") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Experimental")}
+        >
           <Text style={styles.styleTxt}>Experimental</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[ styles.styleBtn,    selectedButtons.includes("Hard Music") && {backgroundColor: "#7C4DFF" }, ]} onPress={() => handleButtonPress("Hard Music")}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.styleBtn,
+            selectedButtons.includes("Hard Music") && {
+              backgroundColor: "#7C4DFF",
+            },
+          ]}
+          onPress={() => handleButtonPress("Hard Music")}
+        >
           <Text style={styles.styleTxt}>Hard Music</Text>
-      </TouchableOpacity>
-        <TouchableOpacity style={styles.validerBtn} onPress={() => {handleSubmit()}}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.validerBtn}
+          onPress={() => {
+            handleSubmit();
+          }}
+        >
           <Text style={styles.validerTxt}>Valider</Text>
         </TouchableOpacity>
       </View>
       {/* Afficher le message d'erreur */}
       {errorMessage ? (
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        ) : null}
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      ) : null}
       {/* <Button title="Go to Home" onPress={() => navigation.navigate("Home")} /> */}
     </View>
   );
@@ -162,5 +218,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "PoppinsRegular",
     marginBottom: 20,
-  }
+  },
 });
