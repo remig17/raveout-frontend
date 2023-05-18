@@ -17,8 +17,8 @@ export default function SignUpSignInScreen({ navigation }) {
 
   useEffect(() => {
     if (user.token) {
-      navigation.navigate('Home');
-    }
+      navigation.navigate('TabNavigator');
+        }
   }, [user.token, navigation]);
 
   return (
