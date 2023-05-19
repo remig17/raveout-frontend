@@ -21,7 +21,7 @@ export default function CardLike(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(removeEventFromLike(props._id));
+          dispatch(removeEventFromLike(props.name));
           setIsCardVisible(false); 
         }
       });
