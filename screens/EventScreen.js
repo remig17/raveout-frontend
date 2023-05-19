@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useSelector } from "react-redux";
+import { getEventById } from "../reducers/event";
 
 export default function EventScreen() {
   const [eventsData, setEventsData] = useState([]);
@@ -12,7 +13,7 @@ export default function EventScreen() {
   console.log("reducer event", event);
 
   useEffect(() => {
-    fetch(`http://${PORT}:3000/events/showAllEvent`)
+    fetch(`http://${PORT}:3000/events/showEventById/:${eventId}`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);

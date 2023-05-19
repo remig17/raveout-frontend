@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: { likedEvents: [] },
+  value: { likedEvents: [], eventId: "" },
 };
 
 export const userSlice = createSlice({
@@ -16,8 +16,12 @@ export const userSlice = createSlice({
         (event) => event.name !== action.payload.name
       );
     },
+    getEventById: (state, action) => {
+      state.value.eventId = action.payload;
+    },
   },
 });
 
-export const { addEventToLike, removeEventFromLike } = userSlice.actions;
+export const { addEventToLike, removeEventFromLike, getEventById } =
+  userSlice.actions;
 export default userSlice.reducer;
