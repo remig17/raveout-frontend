@@ -112,12 +112,12 @@ export default function App() {
               name="SignInFormEmail"
               component={SignInFormEmailScreen}
             />
-            <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="TabNavigator" component={TabNavigator} />
             <Stack.Screen name="Preference" component={PreferenceScreen} />
             <Stack.Screen name="Event" component={EventScreen} />
             <Stack.Screen name="Navbar" component={NavbarScreen} />
             <Stack.Screen name="Like" component={LikeScreen} />
-            
+            <Tab.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
@@ -132,5 +132,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
 });
