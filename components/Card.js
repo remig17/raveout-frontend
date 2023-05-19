@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
+import { getEventById } from "../reducers/event";
 
 export default function Card(props) {
   const navigation = useNavigation();
@@ -34,12 +35,19 @@ export default function Card(props) {
         }
       });
   };
+
+  const handleClick = () => {
+    console.log("id event", props._id);
+    dispatch(getEventById(props._id));
+    navigation.navigate("Event");
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.photocontainer}>
         <TouchableOpacity
           style={styles.photoContainer}
-          onPress={() => navigation.navigate("Event")}
+          onPress={() => handleClick()}
         >
           <Image
             style={styles.photo}
