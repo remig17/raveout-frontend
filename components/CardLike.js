@@ -3,23 +3,15 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
-import { addEventToLike, removeEventFromLike } from "../reducers/event";
+import { removeEventFromLike } from "../reducers/event";
 
 export default function CardLike(props) {
-  const [isLiked, setIsLiked] = useState(true); // Par défaut, le cœur est rempli
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const [isCardVisible, setIsCardVisible] = useState(true);
+  
 
-  const updateLikedEvents = () => {
-    if (isLiked) {
-      dispatch(removeEventFromLike(props._id));
-    } else {
-      dispatch(addEventToLike(props));
-    }
-  };
-
-  const handleLike = () => {
-    setIsLiked(!isLiked); // Inverser l'état du like
+  const handleUnlike = () => {
 
     fetch(`http://${PORT}:3000/users/like`, {
       method: "PUT",
@@ -29,16 +21,16 @@ export default function CardLike(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          updateLikedEvents();
+          dispatch(removeEventFromLike(props._id));
+          setIsCardVisible(false); 
         }
       });
   };
 
-  const handleUnlike = () => {
-    setIsLiked(true); // Rétablir l'état du like à "aimé"
-    updateLikedEvents();
-    props.onUnlike(props._id); // Appeler la fonction de gestion de dé-like du parent
-  };
+  if (!isCardVisible) {
+    return null; 
+  }
+
 
   return (
     <View style={styles.card}>
@@ -53,11 +45,11 @@ export default function CardLike(props) {
               <Text style={styles.lieu}>{props.lieu}</Text>
               <Text style={styles.datedebut}>{props.date_debut}</Text>
             </View>
-            <TouchableOpacity onPress={isLiked ? handleUnlike : handleLike}>
+            <TouchableOpacity onPress={ () => {handleUnlike()}}>
               <FontAwesome
-                name={isLiked ? "heart" : "heart-o"} // Utiliser un cœur rempli ou vide en fonction de l'état du like
+                name={"heart"} 
                 size={20}
-                color={isLiked ? "#7C4DFF" : "#9B9B9B"} // Utiliser une couleur différente pour le like aimé ou non aimé
+                color={"#7C4DFF"} 
                 style={styles.likeIcon}
               />
             </TouchableOpacity>
