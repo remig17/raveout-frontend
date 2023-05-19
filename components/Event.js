@@ -1,10 +1,18 @@
-import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Card(props) {
   const navigation = useNavigation();
@@ -53,6 +61,10 @@ export default function Card(props) {
         <View>
           <View style={styles.heartcontainer}>
             <View>
+              <Text style={styles.organisateur}>Par {props.organisateur}</Text>
+              <TouchableOpacity style={styles.btnBillet}>
+                <Text style={styles.textBtn}>Billet</Text>
+              </TouchableOpacity>
               <Text style={styles.lieu}>{props.lieu}</Text>
               <Text style={styles.datedebut}>{props.date_debut}</Text>
             </View>
@@ -71,8 +83,9 @@ export default function Card(props) {
           </View>
         </View>
         <View style={styles.tagsContainer}>
-          <TouchableOpacity style={styles.tag}>{props.tags}</TouchableOpacity>
+          <Text style={styles.tags}>{props.tags}</Text>
         </View>
+        <Text style={styles.description}>{props.description}</Text>
       </View>
     </View>
   );
@@ -83,18 +96,20 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     alignContent: "center",
-    width: 350,
-    height: 200,
+    width: "100%",
+    height: 500,
     marginBottom: 50,
+    backgroundColor: "#262626",
   },
   photocontainer: {
     width: "100%",
-    height: "100%",
+    height: "70%",
   },
   photo: {
     resizeMode: "contain",
     width: "100%",
     height: "100%",
+    paddingBottom: 30,
   },
   likeIcon: {
     marginRight: 10,
@@ -105,21 +120,51 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
   },
+  description: {
+    color: "white",
+    marginLeft: 10,
+    marginRight: 10,
+  },
   name: {
     fontFamily: "PoppinsBold",
     color: "white",
+    fontSize: 25,
     marginTop: 10,
+    marginLeft: 22,
+  },
+  organisateur: {
+    fontFamily: "PoppinsSemiBold",
+    color: "white",
+    fontSize: 15,
+    marginTop: 10,
+    marginLeft: 92,
+  },
+  btnBillet: {
+    marginTop: 15,
+    padding: 15,
+    marginLeft: 120,
+    width: 120,
+    backgroundColor: "#7C4DFF",
+    borderRadius: "10%",
+  },
+  textBtn: {
+    fontFamily: "PoppinsSemiBold",
+    color: "white",
+    paddingLeft: 25,
   },
   lieu: {
+    paddingTop: 15,
+    marginLeft: 5,
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
   datedebut: {
+    marginLeft: 5,
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
-  tagsContainer: {},
-  tag: {},
+  tagsContainer: { justifyContent: "center", alignContent: "center" },
+  tags: { fontFamily: "PoppinsBold", color: "white", marginTop: 10 },
   heartcontainer: {
     flexDirection: "row",
     justifyContent: "space-between",

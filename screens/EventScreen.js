@@ -1,34 +1,48 @@
-import { Text, View, Button, StyleSheet, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import NavbarScreen from "./NavbarScreen";
-import Event from "../components/Event";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
-console.log(PORT);
 import { useSelector } from "react-redux";
+import Event from "../components/Event";
 
 export default function EventScreen() {
   const [eventsData, setEventsData] = useState([]);
   const event = useSelector((state) => state.event.value);
-  console.log("reducer event", event.eventId);
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showEventById/${event.eventId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setEventsData(data.event);
       });
   }, []);
 
   return (
-    <View style={styles.main}>
-      <NavbarScreen></NavbarScreen>
+    <>
+      <NavbarScreen style={styles.navbar}></NavbarScreen>
+      {/* <SafeAreaView style={styles.all}> */}
       <ScrollView>
-        <Text style={styles.name}>{eventsData.name}</Text>
-        {/* <View style={styles.content}>{events}</View> */}
+        <Event
+          photo={eventsData.photo}
+          name={eventsData.name}
+          lieu={eventsData.lieu}
+          date_debut={eventsData.date_debut}
+          tag={eventsData.tags}
+          _id={eventsData._id}
+          description={eventsData.description}
+          organisateur={eventsData.organisateur}
+        />
       </ScrollView>
-    </View>
+      {/* </SafeAreaView> */}
+    </>
   );
 }
 

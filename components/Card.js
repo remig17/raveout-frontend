@@ -37,7 +37,6 @@ export default function Card(props) {
   };
 
   const handleClick = () => {
-    console.log("id event", props._id);
     dispatch(getEventById(props._id));
     navigation.navigate("Event");
   };
@@ -78,7 +77,9 @@ export default function Card(props) {
           </View>
         </View>
         <View style={styles.tagsContainer}>
-          <TouchableOpacity style={styles.tag}>{props.tags}</TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.tag}>{props.tags}</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -126,7 +127,10 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsRegular",
   },
   tagsContainer: {},
-  tag: {},
+  tag: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   heartcontainer: {
     flexDirection: "row",
     justifyContent: "space-between",
