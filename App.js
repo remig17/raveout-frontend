@@ -87,6 +87,7 @@ export default function App() {
     PoppinsBlack: require("./assets/fonts/Poppins-Black.ttf"),
     PoppinsBlackItalic: require("./assets/fonts/Poppins-BlackItalic.ttf"),
     PoppinsBold: require("./assets/fonts/Poppins-Bold.ttf"),
+    PoppinsSemiBold: require("./assets/fonts/Poppins-SemiBold.ttf"),
     PoppinsRegular: require("./assets/fonts/Poppins-Regular.ttf"),
   });
 
