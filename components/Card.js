@@ -9,14 +9,13 @@ import { getEventById } from "../reducers/event";
 
 export default function Card(props) {
   const navigation = useNavigation();
-  const [isLiked, setIsLiked] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const [isLiked, setIsLiked] = useState(props.isLiked);
 
-
+  
 
   const handleLike = () => {
-    setIsLiked(!isLiked);
     fetch(`http://${PORT}:3000/users/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -26,12 +25,15 @@ export default function Card(props) {
       .then((data) => {
         if (data.result && isLiked) {
           dispatch(removeEventFromLike(props._id));
-        }
-        else{
+          setIsLiked(false);
+        } else if (data.result && !isLiked) {
           dispatch(addEventToLike(props));
+          setIsLiked(true);
         }
       });
   };
+  
+  
 
   const handleClick = () => {
     dispatch(getEventById(props._id));
@@ -42,7 +44,6 @@ export default function Card(props) {
     <View style={styles.card}>
       <View style={styles.photocontainer}>
         <TouchableOpacity
-          style={styles.photoContainer}
           onPress={() => handleClick()}
         >
           <Image
@@ -65,9 +66,9 @@ export default function Card(props) {
               }}
             >
               <FontAwesome
-                name={isLiked ? "heart" : "heart-o"} // Utiliser un cœur rempli ou vide en fonction de l'état du like
+                name={isLiked ? "heart" : "heart-o"}
                 size={20}
-                color={"#7C4DFF"} // Utiliser une couleur différente pour le like aimé ou non aimé
+                color={"#7C4DFF"} 
                 style={styles.likeIcon}
               />
             </TouchableOpacity>

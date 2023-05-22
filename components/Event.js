@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Event(props) {
   const navigation = useNavigation();

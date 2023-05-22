@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Text,
   View,
@@ -6,9 +7,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+=======
+import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+>>>>>>> e30f0b2ba75ae7d14938a9d569d4723f78cc6ded
 import React, { useEffect } from "react";
 import NavbarScreen from "./NavbarScreen";
-import CardLike from "../components/CardLike";
+import Card from "../components/Card";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
@@ -17,6 +21,9 @@ import { useSelector } from "react-redux";
 export default function LikeScreen({ navigation }) {
   const [likesData, setLikesData] = useState([]);
   const user = useSelector((state) => state.user.value);
+  const event = useSelector((state) => state.event.value);
+  const likedEvents = event.likedEvents
+
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
@@ -32,11 +39,18 @@ export default function LikeScreen({ navigation }) {
     navigation.navigate("TabNavigator");
   };
 
+ 
+
+
   let likes;
 
-  if (likesData.length > 0) {
-    likes = likesData.map((data, i) => (
-      <CardLike
+
+  if (event.likedEvents.length > 0) {
+    likes = event.likedEvents.map((data, i) => {
+
+      const isLiked = likedEvents.some(event => event.name === data.name)
+
+      return(<Card
         key={i}
         photo={data.photo}
         name={data.name}
@@ -44,8 +58,10 @@ export default function LikeScreen({ navigation }) {
         date_debut={data.date_debut}
         tag={data.tags}
         _id={data._id}
-      />
-    ));
+        isLiked={isLiked}
+      />)
+      
+      });
   } else {
     likes = (
       <View style={styles.noLikesContainer}>
@@ -65,6 +81,7 @@ export default function LikeScreen({ navigation }) {
       <SafeAreaView style={styles.all}>
         <ScrollView>
           <Text style={styles.intro}>MES EVENEMENTS: </Text>
+   
           <View style={styles.main}>{likes}</View>
         </ScrollView>
       </SafeAreaView>
