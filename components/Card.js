@@ -3,7 +3,11 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
-import { addEventToLike, removeEventFromLike, getEventById } from "../reducers/event";
+import {
+  addEventToLike,
+  removeEventFromLike,
+  getEventById,
+} from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Card(props) {
@@ -11,8 +15,6 @@ export default function Card(props) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(props.isLiked);
-
-  
 
   const handleLike = () => {
     fetch(`http://${PORT}:3000/users/like`, {
@@ -32,9 +34,6 @@ export default function Card(props) {
         }
       });
   };
-  
-  
-  
 
   const handleClick = () => {
     dispatch(getEventById(props._id));
@@ -44,9 +43,7 @@ export default function Card(props) {
   return (
     <View style={styles.card}>
       <View style={styles.photocontainer}>
-        <TouchableOpacity
-          onPress={() => handleClick()}
-        >
+        <TouchableOpacity onPress={() => handleClick()}>
           <Image
             style={styles.photo}
             source={{ uri: `${props.photo}` }}
@@ -69,7 +66,7 @@ export default function Card(props) {
               <FontAwesome
                 name={isLiked ? "heart" : "heart-o"}
                 size={20}
-                color={"#7C4DFF"} 
+                color={"#7C4DFF"}
                 style={styles.likeIcon}
               />
             </TouchableOpacity>
@@ -126,7 +123,7 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsRegular",
   },
   tagsContainer: {},
-  tag: {
+  tags: {
     flexDirection: "row",
     justifyContent: "space-between",
   },

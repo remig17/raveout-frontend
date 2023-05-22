@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { PORT } from "@env";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../reducers/user";
 
 const EditProfileModal = ({ visible, onClose }) => {
@@ -17,6 +17,7 @@ const EditProfileModal = ({ visible, onClose }) => {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
   console.log("données", pseudo, email, description);
   const handleSave = () => {
     fetch(`http://${PORT}:3000/users/modifyProfile`, {
@@ -33,14 +34,13 @@ const EditProfileModal = ({ visible, onClose }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("console log retour fetch", data);
-        if (data.modifiedCount > 0) {
-          dispatch(login({ email: email, pseudo: pseudo }));
-        }
+        // if (data.modifiedCount > 0) {
+        dispatch(login({ email: email, pseudo: pseudo, token: user.token }));
+        // }
         onClose();
       });
   };
-
+  console.log("reducer", user);
   return (
     <Modal visible={visible} onRequestClose={onClose}>
       <View style={styles.container}>
