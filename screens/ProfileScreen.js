@@ -48,7 +48,7 @@ export default function ProfileScreen() {
               source={require("../assets/avatar.png")}
             ></Image>
           </TouchableOpacity>
-          <Text style={styles.pseudo}>{userData.pseudo}</Text>
+          <Text style={styles.pseudo}>{user.pseudo}</Text>
           <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>
             <Text style={styles.textBtn}>Modifier mes informations</Text>
           </TouchableOpacity>

@@ -1,12 +1,17 @@
-import { Text, View, StyleSheet, ScrollView , TouchableOpacity} from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useDispatch, useSelector } from "react-redux";
-import {clearEvent } from "../reducers/event";
-
+import { clearEvent } from "../reducers/event";
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
@@ -21,15 +26,15 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
+    console.log(data.tags);
     return (
-      
       <Card
         key={i}
         photo={data.photo}
         name={data.name}
         lieu={data.lieu}
         date_debut={data.date_debut}
-        tag={data.tags}
+        tags={data.tags}
         _id={data._id}
       />
     );
@@ -38,13 +43,18 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <NavbarScreen style={styles.navbar}></NavbarScreen>
-      <TouchableOpacity class={styles.clear} onPress={() => {dispatch(clearEvent())}}>
-            <Text>CLEAR</Text>
-            </TouchableOpacity>
+      <TouchableOpacity
+        class={styles.clear}
+        onPress={() => {
+          dispatch(clearEvent());
+        }}
+      >
+        <Text>CLEAR</Text>
+      </TouchableOpacity>
       <SafeAreaView style={styles.all}>
         <ScrollView>
           <Text style={styles.intro}>A VENIR: </Text>
-          
+
           <View style={styles.main}>{events}</View>
         </ScrollView>
       </SafeAreaView>
@@ -75,5 +85,5 @@ const styles = StyleSheet.create({
     width: 20,
     backgroundColor: "white",
     marginTop: 50,
-  }
+  },
 });

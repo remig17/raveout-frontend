@@ -20,7 +20,7 @@ export const userSlice = createSlice({
     },
     addTags: (state, action) => {
       console.log("actionPayload", action.payload);
-      state.value.tags = action.payload;
+      state.value.tags = action.payload.tags;
     },
   },
 });
