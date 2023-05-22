@@ -14,7 +14,7 @@ import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Card(props) {
+export default function Event(props) {
   const navigation = useNavigation();
   const [isLiked, setIsLiked] = useState(false);
   const dispatch = useDispatch();
