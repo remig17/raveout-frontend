@@ -6,17 +6,28 @@ import {
   StyleSheet,
   Image,
   View,
+  Button,
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import NavbarScreen from "./NavbarScreen";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { PORT } from "@env";
+import EditProfileModal from "../components/EditProfileModal";
 
 export default function ProfileScreen() {
   const [userData, setUserData] = useState([]);
 
   const user = useSelector((state) => state.user.value);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
@@ -25,8 +36,6 @@ export default function ProfileScreen() {
         setUserData(data.user);
       });
   }, []);
-
-  console.log("user Data", userData);
 
   return (
     <View style={styles.main}>
@@ -40,16 +49,17 @@ export default function ProfileScreen() {
             ></Image>
           </TouchableOpacity>
           <Text style={styles.pseudo}>{userData.pseudo}</Text>
+          <Button
+            style={styles.modifyBtn}
+            title="Modifier mes informations"
+            onPress={handleOpenModal}
+          />
           <Text style={styles.titre}>Description</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-            voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-            fugiat iusto fuga praesentium optio, eaque rerum!
-          </Text>
+          <Text style={styles.description}>{userData.description}</Text>
           <Text style={styles.passedEvents}>Evènements passés</Text>
         </View>
       </TouchableOpacity>
+      <EditProfileModal visible={isModalVisible} onClose={handleCloseModal} />
     </View>
   );
 }
@@ -64,16 +74,25 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   avatarPhoto: {
-    width: 100,
-    height: 100,
+    width: 75,
+    height: 75,
     marginLeft: 130,
+    marginTop: 10,
   },
   pseudo: {
     fontFamily: "PoppinsBold",
     color: "white",
-    fontSize: 30,
+    fontSize: 25,
     marginTop: 10,
     marginLeft: 130,
+  },
+  modifyBtn: {
+    marginTop: 15,
+    padding: 15,
+    marginLeft: 120,
+    width: 120,
+    backgroundColor: "#7C4DFF",
+    borderRadius: "10%",
   },
   titre: {
     fontFamily: "PoppinsSemiBold",
