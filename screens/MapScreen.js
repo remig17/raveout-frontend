@@ -13,6 +13,31 @@ export default function MapScreen(){
     /* const icons = {
         icon: require('./assets/1.png'),
       }; */
+
+      const convertCoordsToKm = (coord1, coord2) => {
+        const R = 6371; // Rayon de la Terre en kilomètres
+      
+        const lat1 = coord1.latitude;
+        const lon1 = coord1.longitude;
+        const lat2 = coord2.latitude;
+        const lon2 = coord2.longitude;
+      
+        const dLat = toRadians(lat2 - lat1);
+        const dLon = toRadians(lon2 - lon1);
+      
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      
+        const distance = R * c;
+        return distance.toFixed(2); // Renvoie la distance arrondie à 2 décimales
+      };
+      
+      const toRadians = (angle) => {
+        return angle * (Math.PI / 180);
+      };
+      
       
 
     const [locations, setLocations] = useState([]);
@@ -27,6 +52,7 @@ export default function MapScreen(){
             Location.watchPositionAsync({ distanceInterval: 10 },
               (location) => {
                 console.log(location);
+                setCurrentLocation(location.coords);
               });
           }
         })()
@@ -44,46 +70,33 @@ export default function MapScreen(){
       }, [])
     
   
-  /*  /*  const toRadius = (deg) => {
-      return deg * (Math.PI / 180);
-    }; */
-  
-   /*  const convertCoordsToKm = (origin, target) => {
-      const R = 6371;
-  
-      const latRadians = toRadius(target.latitude - origin.latitude) / 2;
-      const longRadians = toRadius(target.longitude - origin.longitude) / 2;
-  
-      const a = Math.pow(Math.sin(latRadians), 2) + Math.cos(toRadius(origin.latitude)) * Math.cos(toRadius(target.latitude)) * Math.pow(Math.sin(longRadians), 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  
-      return (R * c).toFixed(2);
-    };
-  
-    const updateDistances = (userCoordinates) => {
-      const newLocations = locations.map((data) => {
-        return { ...data, distance: convertCoordsToKm(userCoordinates, data.coordinates) };
-      });
-  
-      setLocations(newLocations);
-    } */
+
    
 
     const markers = locations.map((data, i) => {
+
+      const distance = convertCoordsToKm(currentLocation, {
+        latitude: data.latitude,
+        longitude: data.longitude,
+      });
         
       return (
         <Marker
-          key={i}
-          coordinate={{
-            latitude: data.latitude,
-            longitude: data.longitude,
-          }}
-          title={`${data.name}\n${data.lieu}`}
-          description={`${data.distance}km`}
-          image={data.image}
-          anchor={{ x: 0.5, y: 0.5 }}
-          
+        key={i}
+        coordinate={{
+          latitude: data.latitude,
+          longitude: data.longitude,
+        }}
+        title={`${data.name}`}
+        description={`${data.lieu} - ${distance} km`}
+        anchor={{ x: 0.5, y: 0.5 }}
+      >
+        <Image
+          source={{ uri: data.photo }}
+          style={{ width: 50, height: 50 }} 
+          resizeMode="contain"
         />
+      </Marker>
       );
     }); 
   

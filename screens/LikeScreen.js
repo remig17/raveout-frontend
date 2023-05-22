@@ -1,6 +1,6 @@
 import { Text, View, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import NavbarScreen from "./NavbarScreen";
-import CardLike from "../components/Card";
+import CardLike from "../components/CardLike";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";

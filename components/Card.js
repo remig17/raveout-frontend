@@ -13,13 +13,7 @@ export default function Card(props) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
-  const updateLikedEvents = () => {
-    if (isLiked) {
-      dispatch(removeEventFromLike(props._id));
-    } else {
-      dispatch(addEventToLike(props));
-    }
-  };
+
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -30,8 +24,11 @@ export default function Card(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.result) {
-          updateLikedEvents();
+        if (data.result && isLiked) {
+          dispatch(removeEventFromLike(props._id));
+        }
+        else{
+          dispatch(addEventToLike(props));
         }
       });
   };
