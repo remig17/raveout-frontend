@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   Text,
   View,
@@ -7,9 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-=======
-import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
->>>>>>> e30f0b2ba75ae7d14938a9d569d4723f78cc6ded
 import React, { useEffect } from "react";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
