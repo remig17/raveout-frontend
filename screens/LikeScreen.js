@@ -1,4 +1,11 @@
-import { Text, View, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect } from "react";
 import NavbarScreen from "./NavbarScreen";
 import CardLike from "../components/CardLike";
@@ -21,10 +28,8 @@ export default function LikeScreen({ navigation }) {
       });
   }, []);
 
-  
-
   const handleBrowse = () => {
-    navigation.navigate('TabNavigator');
+    navigation.navigate("TabNavigator");
   };
 
   let likes;
@@ -44,7 +49,9 @@ export default function LikeScreen({ navigation }) {
   } else {
     likes = (
       <View style={styles.noLikesContainer}>
-        <Text style={styles.noLikesText}>Vous n'avez pas encore liké d'évènements</Text>
+        <Text style={styles.noLikesText}>
+          Vous n'avez pas encore liké d'évènements
+        </Text>
         <TouchableOpacity onPress={handleBrowse} style={styles.browseButton}>
           <Text style={styles.browseButtonText}>Parcourir</Text>
         </TouchableOpacity>
