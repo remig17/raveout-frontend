@@ -1,14 +1,16 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView , TouchableOpacity} from "react-native";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {clearEvent } from "../reducers/event";
+
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
-  const event = useSelector((state) => state.event.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -36,9 +38,13 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <NavbarScreen style={styles.navbar}></NavbarScreen>
+      <TouchableOpacity class={styles.clear} onPress={() => {dispatch(clearEvent())}}>
+            <Text>CLEAR</Text>
+            </TouchableOpacity>
       <SafeAreaView style={styles.all}>
         <ScrollView>
           <Text style={styles.intro}>A VENIR: </Text>
+          
           <View style={styles.main}>{events}</View>
         </ScrollView>
       </SafeAreaView>
@@ -64,4 +70,10 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     marginLeft: 12,
   },
+  clear: {
+    color: "red",
+    width: 20,
+    backgroundColor: "white",
+    marginTop: 50,
+  }
 });
