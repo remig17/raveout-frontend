@@ -1,4 +1,15 @@
+<<<<<<< HEAD
+import {
+  Text,
+  View,
+  Button,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+=======
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+>>>>>>> e30f0b2ba75ae7d14938a9d569d4723f78cc6ded
 import React, { useEffect } from "react";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
@@ -56,7 +67,9 @@ export default function LikeScreen({ navigation }) {
   } else {
     likes = (
       <View style={styles.noLikesContainer}>
-        <Text style={styles.noLikesText}>Vous n'avez pas encore liké d'évènements</Text>
+        <Text style={styles.noLikesText}>
+          Vous n'avez pas encore liké d'évènements
+        </Text>
         <TouchableOpacity onPress={handleBrowse} style={styles.browseButton}>
           <Text style={styles.browseButtonText}>Parcourir</Text>
         </TouchableOpacity>

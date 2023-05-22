@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Modal, View, Button, TextInput, StyleSheet } from "react-native";
+import {
+  Modal,
+  View,
+  Button,
+  TextInput,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { PORT } from "@env";
 import { useSelector } from "react-redux";
 import { login } from "../reducers/user";
@@ -34,27 +42,32 @@ const EditProfileModal = ({ visible, onClose }) => {
   };
 
   return (
-    <Modal visible={visible} onRequestClose={onClose} style={styles.modal}>
+    <Modal visible={visible} onRequestClose={onClose}>
       <View style={styles.container}>
-        <TextInput
-          placeholder="Pseudo"
-          value={pseudo}
-          onChangeText={setPseudo}
-          style={styles.pseudo}
-        />
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.email}
-        />
-        <TextInput
-          placeholder="Description"
-          value={description}
-          onChangeText={setDescription}
-          style={styles.description}
-        />
-        <Button title="Enregistrer" onPress={handleSave} />
+        <Text style={styles.title}>MODIFIER VOS INFORMATIONS</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Pseudo"
+            value={pseudo}
+            onChangeText={setPseudo}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Description"
+            value={description}
+            onChangeText={setDescription}
+            style={styles.input}
+          />
+          <TouchableOpacity style={styles.save} onPress={handleSave}>
+            <Text style={styles.textbtn}>Enregistrer</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Modal>
   );
@@ -63,27 +76,43 @@ const EditProfileModal = ({ visible, onClose }) => {
 export default EditProfileModal;
 
 const styles = StyleSheet.create({
-  modal: {
-    backgroundColor: "#262626",
-  },
   container: {
     flex: 1,
-    marginLeft: 60,
-    height: "80%",
-    width: "80%",
-    backgroundColor: "white",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#262626",
     justifyContent: "center",
     alignContent: "center",
   },
-  pseudo: {
-    fontFamily: "PoppinsRegular",
-    backgroundColor: "red",
-    marginBottom: 20,
+  title: {
+    fontFamily: "PoppinsBold",
+    color: "white",
+    textAlign: "center",
+    marginTop: 150,
   },
-  email: {
-    fontFamily: "PoppinsRegular",
-    backgroundColor: "red",
-    marginBottom: 20,
+  input: {
+    // flex: 0.5,
+    backgroundColor: "#F2F3F3",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "80%",
+    height: 30,
+    marginBottom: 30,
+    borderRadius: 5,
   },
-  description: { fontFamily: "PoppinsRegular", backgroundColor: "red" },
+  inputContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  save: {
+    backgroundColor: "#7C4DFF",
+    color: "white",
+    fontFamily: "PoppinsBold",
+    borderRadius: "5%",
+  },
+  textbtn: {
+    color: "white",
+    padding: 10,
+  },
 });

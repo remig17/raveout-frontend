@@ -49,14 +49,26 @@ export default function ProfileScreen() {
             ></Image>
           </TouchableOpacity>
           <Text style={styles.pseudo}>{userData.pseudo}</Text>
-          <Button
-            style={styles.modifyBtn}
-            title="Modifier mes informations"
-            onPress={handleOpenModal}
-          />
+          <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>
+            <Text style={styles.textBtn}>Modifier mes informations</Text>
+          </TouchableOpacity>
           <Text style={styles.titre}>Description</Text>
           <Text style={styles.description}>{userData.description}</Text>
           <Text style={styles.passedEvents}>Evènements passés</Text>
+          <View style={styles.passedEventsContainer}>
+            <Image
+              style={styles.passedEventPhoto}
+              source={require("../assets/events/acontraluz.png")}
+            ></Image>
+            <Image
+              style={styles.passedEventPhoto}
+              source={require("../assets/events/organik.png")}
+            ></Image>
+            <Image
+              style={styles.passedEventPhoto}
+              source={require("../assets/events/newrave.png")}
+            ></Image>
+          </View>
         </View>
       </TouchableOpacity>
       <EditProfileModal visible={isModalVisible} onClose={handleCloseModal} />
@@ -76,7 +88,7 @@ const styles = StyleSheet.create({
   avatarPhoto: {
     width: 75,
     height: 75,
-    marginLeft: 130,
+    marginLeft: 150,
     marginTop: 10,
   },
   pseudo: {
@@ -84,15 +96,22 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 25,
     marginTop: 10,
-    marginLeft: 130,
+    textAlign: "center",
   },
   modifyBtn: {
-    marginTop: 15,
-    padding: 15,
-    marginLeft: 120,
-    width: 120,
     backgroundColor: "#7C4DFF",
-    borderRadius: "10%",
+    color: "white",
+    fontFamily: "PoppinsBold",
+    borderRadius: "5%",
+    width: "60%",
+    marginLeft: 70,
+    marginTop: 10,
+    alignContent: "center",
+  },
+  textBtn: {
+    fontFamily: "PoppinsRegular",
+    color: "white",
+    textAlign: "center",
   },
   titre: {
     fontFamily: "PoppinsSemiBold",
@@ -108,10 +127,23 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 13,
   },
+  passedEventsContainer: {
+    // flex: 1,
+    flexDirection: "row",
+    justifyContent: "centers",
+    alignItems: "center",
+    marginTop: 20,
+    marginLeft: 10,
+  },
   passedEvents: {
     fontFamily: "PoppinsSemiBold",
     color: "white",
     marginLeft: 15,
     marginTop: 30,
+  },
+  passedEventPhoto: {
+    width: 105,
+    height: 105,
+    marginLeft: 5,
   },
 });
