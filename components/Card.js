@@ -3,9 +3,12 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
-import { addEventToLike, removeEventFromLike } from "../reducers/event";
+import {
+  addEventToLike,
+  removeEventFromLike,
+  getEventById,
+} from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
-import { getEventById } from "../reducers/event";
 
 export default function Card(props) {
   const navigation = useNavigation();
@@ -21,12 +24,13 @@ export default function Card(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.result && isLiked) {
-          dispatch(removeEventFromLike(props._id));
-          setIsLiked(false);
-        } else if (data.result && !isLiked) {
-          dispatch(addEventToLike(props));
-          setIsLiked(true);
+        if (data.result) {
+          if (isLiked) {
+            dispatch(removeEventFromLike(props));
+          } else {
+            dispatch(addEventToLike(props));
+          }
+          setIsLiked(!isLiked);
         }
       });
   };

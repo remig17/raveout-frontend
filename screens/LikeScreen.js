@@ -8,29 +8,31 @@ import {
 import React, { useEffect } from "react";
 import NavbarScreen from "./NavbarScreen";
 import Card from "../components/Card";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useSelector } from "react-redux";
+import { clearEvent } from "../reducers/event";
 
 export default function LikeScreen({ navigation }) {
-  const [likesData, setLikesData] = useState([]);
   const user = useSelector((state) => state.user.value);
   const event = useSelector((state) => state.event.value);
   const likedEvents = event.likedEvents;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data && data.like && data.like.length > 0) {
-          setLikesData(data.like);
+          console.log(data);
         }
       });
   }, []);
 
   const handleBrowse = () => {
     navigation.navigate("TabNavigator");
+    dispatch(clearEvent()); // Réinitialiser les événements aimés
   };
 
   let likes;
@@ -39,6 +41,8 @@ export default function LikeScreen({ navigation }) {
     likes = event.likedEvents.map((data, i) => {
       const isLiked = likedEvents.some((event) => event.name === data.name);
 
+      let isLiked = likedEvents.some((event) => event.name === data.name);
+
       return (
         <Card
           key={i}
@@ -46,7 +50,7 @@ export default function LikeScreen({ navigation }) {
           name={data.name}
           lieu={data.lieu}
           date_debut={data.date_debut}
-          tag={data.tags}
+          tags={data.tags}
           _id={data._id}
           isLiked={isLiked}
         />
