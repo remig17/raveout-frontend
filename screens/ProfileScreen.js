@@ -55,13 +55,7 @@ export default function ProfileScreen() {
             onPress={handleOpenModal}
           />
           <Text style={styles.titre}>Description</Text>
-          <Text style={styles.description}>
-            {userData.description}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-            voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-            fugiat iusto fuga praesentium optio, eaque rerum!
-          </Text>
+          <Text style={styles.description}>{userData.description}</Text>
           <Text style={styles.passedEvents}>Evènements passés</Text>
         </View>
       </TouchableOpacity>

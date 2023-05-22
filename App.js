@@ -117,7 +117,7 @@ export default function App() {
             <Stack.Screen name="Preference" component={PreferenceScreen} />
             <Stack.Screen name="Event" component={EventScreen} />
             <Stack.Screen name="Navbar" component={NavbarScreen} />
-            <Stack.Screen name="Like" component={LikeScreen} />
+            <Stack.Screen name="Like" component={LikeScreen} options={{ tabBarVisible: true, headerShown: false }} />
             <Tab.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
