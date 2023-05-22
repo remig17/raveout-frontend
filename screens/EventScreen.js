@@ -22,26 +22,31 @@ export default function EventScreen() {
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
+
+        
       });
   }, []);
+
+  console.log("checkkk", eventsData.photo)
 
   return (
     <>
       <NavbarScreen style={styles.navbar}></NavbarScreen>
-      {/* <SafeAreaView style={styles.all}> */}
-      <ScrollView>
-        <Event
-          photo={eventsData.photo}
-          name={eventsData.name}
-          lieu={eventsData.lieu}
-          date_debut={eventsData.date_debut}
-          tag={eventsData.tags}
-          _id={eventsData._id}
-          description={eventsData.description}
-          organisateur={eventsData.organisateur}
-        />
-      </ScrollView>
-      {/* </SafeAreaView> */}
+      <SafeAreaView style={styles.content}> 
+      
+      {eventsData.photo && (
+    <Event style={styles.event}
+      photo={eventsData.photo}
+      name={eventsData.name}
+      lieu={eventsData.lieu}
+      date_debut={eventsData.date_debut}
+      tag={eventsData.tags}
+      _id={eventsData._id}
+      description={eventsData.description}
+      organisateur={eventsData.organisateur}
+    />
+  )}
+      </SafeAreaView> 
     </>
   );
 }
@@ -51,11 +56,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
   },
-  content: {
-    flex: 1,
-    backgroundColor: "#262626",
-  },
+
   name: {
     color: "white",
   },
+  content: {
+    height: "100%",
+    backgroundColor: "#262626",
+  },
+  event: {
+    backgroundColor: "#262626",
+  },
+ 
 });

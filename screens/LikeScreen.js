@@ -1,12 +1,13 @@
 import { Text, View, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
 import NavbarScreen from "./NavbarScreen";
 import CardLike from "../components/CardLike";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default function LikeScreen({navigation}) {
+export default function LikeScreen({ navigation }) {
   const [likesData, setLikesData] = useState([]);
   const user = useSelector((state) => state.user.value);
 
@@ -19,6 +20,8 @@ export default function LikeScreen({navigation}) {
         }
       });
   }, []);
+
+  
 
   const handleBrowse = () => {
     navigation.navigate('TabNavigator');

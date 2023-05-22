@@ -44,10 +44,10 @@ export default function Card(props) {
       });
   };
   return (
+    <ScrollView style={styles.scroll} >
     <View style={styles.card}>
       <View style={styles.photocontainer}>
         <TouchableOpacity
-          style={styles.photoContainer}
           onPress={() => navigation.navigate("Event")}
         >
           <Image
@@ -65,7 +65,11 @@ export default function Card(props) {
               <TouchableOpacity style={styles.btnBillet}>
                 <Text style={styles.textBtn}>Billet</Text>
               </TouchableOpacity>
-              <Text style={styles.lieu}>{props.lieu}</Text>
+              
+            </View>
+            <View style={styles.lieudate}>
+              <View>
+            <Text style={styles.lieu}>{props.lieu}</Text>
               <Text style={styles.datedebut}>{props.date_debut}</Text>
             </View>
             <TouchableOpacity
@@ -80,6 +84,7 @@ export default function Card(props) {
                 style={styles.likeIcon}
               />
             </TouchableOpacity>
+            </View>
           </View>
         </View>
         <View style={styles.tagsContainer}>
@@ -88,64 +93,53 @@ export default function Card(props) {
         <Text style={styles.description}>{props.description}</Text>
       </View>
     </View>
+    </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignContent: "center",
-    width: "100%",
-    height: 500,
-    marginBottom: 50,
     backgroundColor: "#262626",
+    flex: 1,
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
   photocontainer: {
     width: "100%",
-    height: "70%",
+    height: "100%",
+    marginTop: 80,
   },
   photo: {
-    resizeMode: "contain",
     width: "100%",
     height: "100%",
-    paddingBottom: 30,
-  },
-  likeIcon: {
-    marginRight: 10,
-  },
-  descriptioncontainer: {
-    marginTop: 10,
-    backgroundColor: "#262626",
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  description: {
-    color: "white",
-    marginLeft: 10,
-    marginRight: 10,
+    resizeMode: "contain",
   },
   name: {
     fontFamily: "PoppinsBold",
     color: "white",
     fontSize: 25,
     marginTop: 10,
-    marginLeft: 22,
+    textAlign: "center",
   },
   organisateur: {
     fontFamily: "PoppinsSemiBold",
     color: "white",
     fontSize: 15,
     marginTop: 10,
-    marginLeft: 92,
+    textAlign: "center",
   },
   btnBillet: {
     marginTop: 15,
     padding: 15,
-    marginLeft: 120,
     width: 120,
     backgroundColor: "#7C4DFF",
-    borderRadius: "10%",
+    borderRadius: 10,
+    textAlign: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   textBtn: {
     fontFamily: "PoppinsSemiBold",
@@ -154,19 +148,37 @@ const styles = StyleSheet.create({
   },
   lieu: {
     paddingTop: 15,
-    marginLeft: 5,
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
   datedebut: {
-    marginLeft: 5,
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
-  tagsContainer: { justifyContent: "center", alignContent: "center" },
-  tags: { fontFamily: "PoppinsBold", color: "white", marginTop: 10 },
-  heartcontainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  tagsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
+  tags: {
+    fontFamily: "PoppinsBold",
+    color: "white",
+    marginTop: 10,
+  },
+  description: {
+    color: "white",
+  },
+  
+  lieudate: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  likeIcon: {
+    marginLeft: 120,
+    marginTop: 20,
+  },
+  descriptioncontainer: {
+    marginBottom: -150,
+    paddingTop: 50,
+  },
+ 
 });
