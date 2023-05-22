@@ -25,27 +25,11 @@ export default function ProfileScreen() {
       });
   }, []);
 
-  const UserData = userData.map((data, i) => {
-    return (
-      <View
-        key={i}
-        pseudo={data.photo}
-        email={data.name}
-        password={data.password}
-        avatar={data.avatar}
-        ville={data.ville}
-        tags={[data.tags]}
-        tickets={[data.tickets]}
-        like={[data.likes]}
-      />
-    );
-  });
-
   return (
     <View style={styles.main}>
       <NavbarScreen></NavbarScreen>
       <TouchableOpacity>
-        <View style={styles.content}>{UserData}</View>
+        <View style={styles.content}>{userData}</View>
       </TouchableOpacity>
     </View>
   );
