@@ -74,7 +74,7 @@ export default function Card(props) {
         </View>
         <View style={styles.tagsContainer}>
           <TouchableOpacity>
-            <Text style={styles.tag}>{props.tags}</Text>
+            <Text style={styles.tags}>{props.tags}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -122,10 +122,15 @@ const styles = StyleSheet.create({
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
-  tagsContainer: {},
-  tags: {
+  tagsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+  },
+  tags: {
+    backgroundColor: "#D5D5FD",
+    textAlign: "left",
+    color: "black",
+    fontFamily: "PoppinsRegular",
+    paddingBottom: 10,
   },
   heartcontainer: {
     flexDirection: "row",
