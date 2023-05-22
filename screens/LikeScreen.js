@@ -41,8 +41,6 @@ export default function LikeScreen({ navigation }) {
     likes = event.likedEvents.map((data, i) => {
       const isLiked = likedEvents.some((event) => event.name === data.name);
 
-      let isLiked = likedEvents.some((event) => event.name === data.name);
-
       return (
         <Card
           key={i}
