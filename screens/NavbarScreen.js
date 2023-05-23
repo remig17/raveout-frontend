@@ -42,10 +42,12 @@ export default function NavbarScreen() {
   }, []);
 
   let city = <Text style={styles.ville}>Choisissez une ville</Text>;
-  // if (userData.ville ====) {
-  //   city = <Text>{userData.ville}</Text>;
-  // }
-  //{userData.ville}
+  if (userData.ville === null) {
+    city;
+  } else {
+    city = <Text style={styles.ville}>{userData.ville}</Text>;
+  }
+
   return (
     <SafeAreaView style={styles.navbar}>
       <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>

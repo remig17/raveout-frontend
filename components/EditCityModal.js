@@ -17,10 +17,10 @@ import { PORT } from "@env";
 const EditCityModal = ({ visible, onClose }) => {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  const [userCity, setUserCity] = useState([]);
+  const [userCity, setUserCity] = useState("");
 
   const navigation = useNavigation();
-
+  console.log(userCity, "city data");
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
       .then((response) => response.json())
