@@ -17,7 +17,7 @@ export default function SignUpFormEmailScreen({ navigation }) {
   const [signUpPseudo, setSignUpPseudo] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
-  
+
   const handleRegister = () => {
     fetch(`http://${PORT}:3000/users/signup`, {
       method: "POST",
@@ -30,8 +30,8 @@ export default function SignUpFormEmailScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("'''", data)
-        console.log("'''", data.token)
+        console.log("'''", data);
+        console.log("'''", data.token);
 
         if (data.result) {
           dispatch(
