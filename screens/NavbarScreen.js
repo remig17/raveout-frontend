@@ -9,44 +9,13 @@ import {
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { ville } from "../reducers/user";
 
 export default function NavbarScreen() {
-  const user = useSelector((state) => state.user.value);
-
-  const [userCity, setUserCity] = useState([]);
-
   const navigation = useNavigation();
-
-  useEffect(() => {
-    fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "c la data");
-        setUserCity(data.user);
-      });
-  }, []);
-
-  const handleOpenModal = () => {
-    setModalVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
 
   return (
     <SafeAreaView style={styles.navbar}>
-      <TouchableOpacity>
-        <Button
-          style={styles.modifyBtn}
-          title="${userCity.ville}"
-          onPress={handleOpenModal}
-        />
-      </TouchableOpacity>
-      <EditProfileModal visible={isModalVisible} onClose={handleCloseModal} />
+      <Text style={styles.ville}>Marseille</Text>
       <View style={styles.centerContainer}>
         <Image source={require("../assets/logo1.png")} style={styles.logo} />
       </View>
