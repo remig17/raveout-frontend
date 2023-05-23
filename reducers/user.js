@@ -8,6 +8,7 @@ const initialState = {
     tags: [],
     likedEvents: [],
     photoUri: null,
+    ville: null,
   },
 };
 
@@ -28,6 +29,9 @@ export const userSlice = createSlice({
     addTags: (state, action) => {
       state.value.tags = action.payload.tags;
     },
+    ville: (state, action) => {
+      state.value.ville = action.payload.ville;
+    },
     updatePhotoUri: (state, action) => {
       state.value.photoUri = action.payload;
       console.log("updatePhotoUri", action.payload);
@@ -35,5 +39,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout, addTags, updatePhotoUri } = userSlice.actions;
+export const { login, logout, addTags, updatePhotoUri, ville } =
+  userSlice.actions;
 export default userSlice.reducer;

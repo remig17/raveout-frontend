@@ -26,6 +26,11 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
+    console.log(data.tags);
+
+    const tags = Array.isArray(data.tags)
+      ? data.tags
+      : String(data.tags).split(" ");
     return (
       <Card
         key={i}
@@ -33,7 +38,7 @@ export default function HomeScreen({ navigation }) {
         name={data.name}
         lieu={data.lieu}
         date_debut={data.date_debut}
-        tags={data.tags}
+        tags={tags}
         _id={data._id}
       />
     );
