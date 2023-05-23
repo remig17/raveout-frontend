@@ -26,7 +26,6 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
-    console.log(data.tags);
     return (
       <Card
         key={i}

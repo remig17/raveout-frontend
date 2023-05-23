@@ -16,6 +16,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import LikeScreen from "./screens/LikeScreen";
 import NavbarScreen from "./screens/NavbarScreen";
 import EventScreen from "./screens/EventScreen";
+import EditPhotoScreen from "./screens/EditPhotoScreen";
 import { useFonts } from "expo-font";
 
 //redux imports
@@ -117,7 +118,12 @@ export default function App() {
             <Stack.Screen name="Preference" component={PreferenceScreen} />
             <Stack.Screen name="Event" component={EventScreen} />
             <Stack.Screen name="Navbar" component={NavbarScreen} />
-            <Stack.Screen name="Like" component={LikeScreen} options={{ tabBarVisible: true, headerShown: false }} />
+            <Stack.Screen
+              name="Like"
+              component={LikeScreen}
+              options={{ tabBarVisible: true, headerShown: false }}
+            />
+            <Stack.Screen name="EditPhoto" component={EditPhotoScreen} />
             <Tab.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
