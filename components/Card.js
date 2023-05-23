@@ -3,17 +3,18 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
-import { addEventToLike, removeEventFromLike } from "../reducers/event";
+import {
+  addEventToLike,
+  removeEventFromLike,
+  getEventById,
+} from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
-import { getEventById } from "../reducers/event";
 
 export default function Card(props) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(props.isLiked);
-
-  
 
   const handleLike = () => {
     fetch(`http://${PORT}:3000/users/like`, {
@@ -23,17 +24,16 @@ export default function Card(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.result && isLiked) {
-          dispatch(removeEventFromLike(props._id));
-          setIsLiked(false);
-        } else if (data.result && !isLiked) {
-          dispatch(addEventToLike(props));
-          setIsLiked(true);
+        if (data.result) {
+          if (isLiked) {
+            dispatch(removeEventFromLike(props));
+          } else {
+            dispatch(addEventToLike(props));
+          }
+          setIsLiked(!isLiked);
         }
       });
   };
-  
-  
 
   const handleClick = () => {
     dispatch(getEventById(props._id));
@@ -43,9 +43,7 @@ export default function Card(props) {
   return (
     <View style={styles.card}>
       <View style={styles.photocontainer}>
-        <TouchableOpacity
-          onPress={() => handleClick()}
-        >
+        <TouchableOpacity onPress={() => handleClick()}>
           <Image
             style={styles.photo}
             source={{ uri: `${props.photo}` }}
@@ -68,7 +66,7 @@ export default function Card(props) {
               <FontAwesome
                 name={isLiked ? "heart" : "heart-o"}
                 size={20}
-                color={"#7C4DFF"} 
+                color={"#7C4DFF"}
                 style={styles.likeIcon}
               />
             </TouchableOpacity>
@@ -76,7 +74,7 @@ export default function Card(props) {
         </View>
         <View style={styles.tagsContainer}>
           <TouchableOpacity>
-            <Text style={styles.tag}>{props.tags}</Text>
+            <Text style={styles.tags}>{props.tags}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -124,10 +122,15 @@ const styles = StyleSheet.create({
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
-  tagsContainer: {},
-  tag: {
+  tagsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+  },
+  tags: {
+    backgroundColor: "#D5D5FD",
+    textAlign: "left",
+    color: "black",
+    fontFamily: "PoppinsRegular",
+    paddingBottom: 10,
   },
   heartcontainer: {
     flexDirection: "row",

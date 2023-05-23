@@ -12,10 +12,10 @@ export const userSlice = createSlice({
       state.value.likedEvents.push(action.payload);
     },
     removeEventFromLike: (state, action) => {
-      console.log("logReducer", action.payload)
-      state.value.likedEvents = state.likedEvents.filter(
-        (event) => event.name !== action.payload.name
+      state.value.likedEvents = state.value.likedEvents.filter(
+        (event) => event._id !== action.payload._id
       );
+    
     },
     getEventById: (state, action) => {
       state.value.eventId = action.payload;
