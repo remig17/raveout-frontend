@@ -12,24 +12,46 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { PORT } from "@env";
+import EditCityModal from "../components/EditCityModal";
 
 export default function NavbarScreen() {
   const navigation = useNavigation();
-  const [userData, setUserData] = useState([]);
+
   const user = useSelector((state) => state.user.value);
+
+  const [userData, setUserData] = useState([]);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
+  console.log(userData);
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.user);
         setUserData(data.user);
       });
   }, []);
 
+  let city = <Text style={styles.ville}>Choisissez une ville</Text>;
+  // if (userData.ville ====) {
+  //   city = <Text>{userData.ville}</Text>;
+  // }
+  //{userData.ville}
   return (
     <SafeAreaView style={styles.navbar}>
-      <Text style={styles.ville}>{userData.ville}</Text>
+      <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>
+        {city}
+      </TouchableOpacity>
+      <EditCityModal visible={isModalVisible} onClose={handleCloseModal} />
       <View style={styles.centerContainer}>
         <Image source={require("../assets/logo1.png")} style={styles.logo} />
       </View>

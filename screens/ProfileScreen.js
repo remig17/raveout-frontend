@@ -34,6 +34,7 @@ export default function ProfileScreen() {
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
+        console.log(data.user);
       });
   }, []);
 
