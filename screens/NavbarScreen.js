@@ -29,30 +29,24 @@ export default function NavbarScreen() {
       });
   }, []);
 
-  const handleSave = () => {
-    fetch(`http://${PORT}:3000/users/cityUpdate`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: user.token, // Assuming you have the user token available
-        ville: userCity,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("console log retour fetch", data);
-        if (data.modifiedCount > 0) {
-          dispatch(ville({ ville: ville }));
-        }
-      });
+  const handleOpenModal = () => {
+    setModalVisible(true);
   };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <SafeAreaView style={styles.navbar}>
       <TouchableOpacity>
-        <Text style={styles.ville}>{userCity.ville}</Text>
+        <Button
+          style={styles.modifyBtn}
+          title="${userCity.ville}"
+          onPress={handleOpenModal}
+        />
       </TouchableOpacity>
+      <EditProfileModal visible={isModalVisible} onClose={handleCloseModal} />
       <View style={styles.centerContainer}>
         <Image source={require("../assets/logo1.png")} style={styles.logo} />
       </View>
