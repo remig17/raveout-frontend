@@ -60,7 +60,7 @@ export default function Card(props) {
             </View>
             <TouchableOpacity
               onPress={() => {
-                handleLike();
+                handleLike("remove");
               }}
             >
               <FontAwesome
@@ -73,10 +73,14 @@ export default function Card(props) {
           </View>
         </View>
         <View style={styles.tagsContainer}>
-          <TouchableOpacity>
-            <Text style={styles.tag}>{props.tags}</Text>
-          </TouchableOpacity>
-        </View>
+          {props.tags.map((tag, index) => (
+            <TouchableOpacity key={index} style={styles.btntag}>
+            <Text  style={styles.tagText}>
+              #{tag}
+            </Text>
+            </TouchableOpacity>
+          ))}
+</View>
       </View>
     </View>
   );
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     width: 350,
     height: 200,
-    marginBottom: 50,
+    marginBottom: 80,
   },
   photocontainer: {
     width: "100%",
@@ -122,13 +126,27 @@ const styles = StyleSheet.create({
     color: "#9B9B9B",
     fontFamily: "PoppinsRegular",
   },
-  tagsContainer: {},
-  tags: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   heartcontainer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  tagText: {
+    color: "#7C4DFF",
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 10,    
+  },
+  btntag: {
+    backgroundColor: "white",
+    textAlign: "center",
+    marginRight: 5,
+    padding: 2,
+    borderRadius: 50,
+  },
+  tagsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 8,
+  },
+  
+
 });

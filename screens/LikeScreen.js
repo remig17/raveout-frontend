@@ -40,8 +40,7 @@ export default function LikeScreen({ navigation }) {
   if (event.likedEvents.length > 0) {
     likes = event.likedEvents.map((data, i) => {
       const isLiked = likedEvents.some((event) => event.name === data.name);
-
-      let isLiked = likedEvents.some((event) => event.name === data.name);
+      const tags = Array.isArray(data.tags) ? data.tags : String(data.tags).split(" ");
 
       return (
         <Card
@@ -50,7 +49,7 @@ export default function LikeScreen({ navigation }) {
           name={data.name}
           lieu={data.lieu}
           date_debut={data.date_debut}
-          tags={data.tags}
+          tags={tags}
           _id={data._id}
           isLiked={isLiked}
         />
