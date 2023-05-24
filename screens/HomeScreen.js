@@ -12,6 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useDispatch, useSelector } from "react-redux";
 import { clearEvent, importDatabase } from "../reducers/event";
+import Moment from "moment";
+import "moment/locale/fr";
 /* import DateSlider from "../components/DateSlider";
  */
 export default function HomeScreen({ navigation }) {
@@ -37,6 +39,8 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const events = eventsData.map((data, i) => {
+    Moment.locale("fr");
+    const formattedDate = Moment(data.date_debut).format("ddd D MMM [à] HH[h]");
     console.log(data.tags);
 
     const tags = Array.isArray(data.tags)
@@ -48,7 +52,7 @@ export default function HomeScreen({ navigation }) {
         photo={data.photo}
         name={data.name}
         lieu={data.lieu}
-        date_debut={data.date_debut}
+        date_debut={formattedDate}
         tags={tags}
         _id={data._id}
         isLiked={isLiked}
