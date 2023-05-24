@@ -18,7 +18,6 @@ const EditProfileModal = ({ visible, onClose }) => {
   const [description, setDescription] = useState("");
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  console.log("données", pseudo, email, description);
   const handleSave = () => {
     fetch(`http://${PORT}:3000/users/modifyProfile`, {
       method: "PUT",
@@ -40,7 +39,6 @@ const EditProfileModal = ({ visible, onClose }) => {
         onClose();
       });
   };
-  console.log("reducer", user);
   return (
     <Modal visible={visible} onRequestClose={onClose}>
       <View style={styles.container}>

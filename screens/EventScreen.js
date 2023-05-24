@@ -25,8 +25,6 @@ export default function EventScreen() {
       });
   }, []);
 
-  console.log("checkkk", eventsData.photo);
-
   return (
     <>
       <NavbarScreen style={styles.navbar}></NavbarScreen>

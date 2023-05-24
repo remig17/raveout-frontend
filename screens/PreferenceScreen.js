@@ -21,10 +21,9 @@ export default function PreferenceScreen({ navigation }) {
   console.log("reducer", user);
 
   const handleSubmit = () => {
-    console.log("click")
-    console.log("ggg", selectedButtons.length)
+    console.log("click");
+    console.log("ggg", selectedButtons.length);
     if (selectedButtons.length === 3) {
-
       fetch(`http://${PORT}:3000/users/musicUpdate`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -32,7 +31,7 @@ export default function PreferenceScreen({ navigation }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
+          console.log(data);
           if (data.result) {
             dispatch(addTags(selectedButtons));
             navigation.navigate("TabNavigator");

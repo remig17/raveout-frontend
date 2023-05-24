@@ -20,33 +20,28 @@ export default function HomeScreen({ navigation }) {
   const event = useSelector((state) => state.event.value);
   const likedEvents = event.likedEvents;
 
-
-
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
       });
-      fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
+    fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data && data.like && data.like.length > 0) {
           console.log(data);
-          dispatch(importDatabase(data.like))
-          
+          dispatch(importDatabase(data.like));
         }
       });
   }, []);
 
-
-
   const events = eventsData.map((data, i) => {
     console.log(data.tags);
-    
- const isLiked = likedEvents.some((event) => event.name === data.name);
- 
-    const tags = Array.isArray(data.tags) ? data.tags : String(data.tags).split(" ");
+
+    const tags = Array.isArray(data.tags)
+      ? data.tags
+      : String(data.tags).split(" ");
     return (
       <Card
         key={i}
@@ -57,7 +52,7 @@ export default function HomeScreen({ navigation }) {
         tags={tags}
         _id={data._id}
         isLiked={isLiked}
-     />
+      />
     );
   });
 
