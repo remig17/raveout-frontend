@@ -32,6 +32,7 @@ export default function HomeScreen({ navigation }) {
         if (data && data.like && data.like.length > 0) {
           console.log(data);
           dispatch(importDatabase(data.like));
+          
         }
       });
   }, []);
