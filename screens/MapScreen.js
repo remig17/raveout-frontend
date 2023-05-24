@@ -21,6 +21,10 @@ export default function MapScreen() {
       }; */
 
   const convertCoordsToKm = (coord1, coord2) => {
+    if (!coord1 || !coord2) {
+      return 0; // ou une valeur par défaut appropriée si les coordonnées sont nulles
+    }
+
     const R = 6371; // Rayon de la Terre en kilomètres
 
     const lat1 = coord1.latitude;
