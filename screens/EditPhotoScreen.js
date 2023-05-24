@@ -42,7 +42,6 @@ export default function EditPhotoScreen() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("data.url", data.url);
         data.result && dispatch(updatePhotoUri(data.url));
         navigation.navigate("Profile", { avatar: data.url });
       });

@@ -16,6 +16,7 @@ import { PORT } from "@env";
 import EditProfileModal from "../components/EditProfileModal";
 import { useNavigation } from "@react-navigation/native";
 import { updatePhotoUri } from "../reducers/user";
+import UserAvatar from "react-native-user-avatar";
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
@@ -38,7 +39,6 @@ export default function ProfileScreen() {
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
-        console.log(data.user);
       });
   }, []);
 
@@ -48,10 +48,25 @@ export default function ProfileScreen() {
       <TouchableOpacity>
         <View style={styles.content}>
           <TouchableOpacity onPress={() => navigation.navigate("EditPhoto")}>
-            <Image
+            <UserAvatar
+              size={75}
+              name={user.pseudo}
+              src={user.avatar}
+              style={styles.avatarPhoto}
+              imageStyle={styles.avatarImage}
+            />
+            <View style={styles.cameraContainer}>
+              <FontAwesome
+                name={"camera"}
+                size={20}
+                color={"#7C4DFF"}
+                style={styles.camIcon}
+              />
+            </View>
+            {/* <Image
               style={styles.avatarPhoto}
               source={{ uri: user.avatar }}
-            ></Image>
+            ></Image> */}
           </TouchableOpacity>
           <Text style={styles.pseudo}>{user.pseudo}</Text>
           <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>
@@ -90,12 +105,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#262626",
     marginTop: 10,
   },
+  avatarImage: {
+    borderRadius: 37.5, // La moitié de la valeur de la taille (75 / 2)
+  },
   avatarPhoto: {
     width: 75,
     height: 75,
     marginLeft: 150,
     marginTop: 10,
   },
+  cameraContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 8,
+  },
+  camIcon: {},
   pseudo: {
     fontFamily: "PoppinsBold",
     color: "white",
