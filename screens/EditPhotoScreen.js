@@ -12,7 +12,7 @@ export default function SnapScreen() {
   const isFocused = useIsFocused();
 
   const [hasPermission, setHasPermission] = useState(false);
-  const [type, setType] = useState(CameraType.back);
+  const [type, setType] = useState(CameraType.front);
   const [flashMode, setFlashMode] = useState(FlashMode.off);
 
   let cameraRef = useRef(null);
@@ -28,7 +28,7 @@ export default function SnapScreen() {
     const photo = await cameraRef.takePictureAsync({ quality: 0.3 });
     const formData = new FormData();
 
-    formData.append("photoFromFront", {
+    formData.append("avatarImage", {
       uri: photo.uri,
       name: "photo.jpg",
       type: "image/jpeg",
