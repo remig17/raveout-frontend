@@ -1,59 +1,96 @@
-/* import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { addDays, eachDayOfInterval, eachWeekOfInterval, subDays, format } from 'date-fns'
-import { PagerView } from 'react-native-pager-view';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { addDays, format, getDate, isSameDay, startOfWeek } from 'date-fns';
 
-export default function DateSlider() {
-  const dates = eachWeekOfInterval(
-    {
-      start: subDays(new Date(), 14),
-      end: addDays(new Date(), 14),
-    },
-    {
-      weekStartsOn: 1,
-    }
-  ).reduce((acc, cur) => {
-    const allDays = eachDayOfInterval({
-      start: cur,
-      end: addDays(cur, 6),
-    });
-    acc.push(allDays);
-    return acc;
+
+function DateSlider({ onDateSelect }) {
+  const [week, setWeek] = useState([]);
+
+  useEffect(() => {
+    const weekDays = getWeekDays(new Date());
+    setWeek(weekDays);
   }, []);
 
-  console.log("showdates", dates);
+  const handleDateChange = (newDate) => {
+    onDateSelect(newDate);
+  };
 
   return (
-    <PagerView style={styles.container}>
-      {dates.map((week, i) => (
-        <View key={i}>
-          <View style={styles.row}>
-            {week.map(day => {
-              const txt = format(day, 'EEEEE');
-              return (
-                <View style={styles.day} key={day.getTime()}>
-                  <Text>{txt}</Text>
-                  <Text>{day.getDate()}</Text>
-                </View>
-              );
-            })}
+    <View style={styles.container}>
+      {week.map((weekDay) => {
+        const textStyles = [styles.label];
+        const touchable = [styles.touchable];
+
+        const sameDay = isSameDay(weekDay.date, new Date());
+        if (sameDay) {
+          textStyles.push(styles.selectedLabel);
+          touchable.push(styles.selectedTouchable);
+        }
+
+        return (
+          <View style={styles.weekDayItem} key={weekDay.formatted}>
+            <Text style={styles.weekDayText}>{weekDay.formatted}</Text>
+            <TouchableOpacity
+              onPress={() => handleDateChange(weekDay.date)}
+              style={touchable}
+            >
+              <Text style={textStyles}>{weekDay.day}</Text>
+            </TouchableOpacity>
           </View>
-        </View>
-      ))}
-    </PagerView>
+        );
+      })}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+    backgroundColor: '#262626',
   },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+  weekDayText: {
+    color: '#7C4DFF',
+    marginBottom: 5,
   },
-  day: {
-    alignItems: "center",
+  label: {
+    fontSize: 14,
+    color: 'gray',
+    textAlign: 'center',
+  },
+  selectedLabel: {
+    color: 'white',
+  },
+  touchable: {
+    borderRadius: 20,
+    padding: 7.5,
+    height: 35,
+    width: 35,
+  },
+  selectedTouchable: {
+    backgroundColor: '#7C4DFF',
+  },
+  weekDayItem: {
+    alignItems: 'center',
   },
 });
- */
+
+function getWeekDays(date) {
+  const start = startOfWeek(date, { weekStartsOn: 1 });
+
+  const final = [];
+
+  for (let i = 0; i < 7; i++) {
+    const date = addDays(start, i);
+    final.push({
+      formatted: format(date, 'EEE'),
+      date,
+      day: getDate(date),
+    });
+  }
+
+  return final;
+}
+
+export default DateSlider;

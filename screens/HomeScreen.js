@@ -12,13 +12,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useDispatch, useSelector } from "react-redux";
 import { clearEvent, importDatabase } from "../reducers/event";
-/* import DateSlider from "../components/DateSlider";
- */
+import { isSameDay } from 'date-fns';
+import DateSlider from "../components/DateSlider";
+ 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date()); 
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -35,6 +37,15 @@ export default function HomeScreen({ navigation }) {
         }
       });
   }, []);
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+  };
+
+  const filteredEvents = eventsData.filter((event) => {
+    const eventDate = new Date(event.date_debut);
+    return isSameDay(eventDate, selectedDate);
+  });
 
   const events = eventsData.map((data, i) => {
     console.log(data.tags);
@@ -59,16 +70,16 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <NavbarScreen></NavbarScreen>
-      {/*       <DateSlider></DateSlider>
-       */}
-      <TouchableOpacity
+            <DateSlider  onDateSelect={handleDateSelect} />
+       
+      {/* <TouchableOpacity
         style={styles.clear}
         onPress={() => {
           dispatch(clearEvent());
         }}
       >
         <Text>CLEAR</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <SafeAreaView style={styles.all}>
         <ScrollView>
           <Text style={styles.intro}>A VENIR: </Text>
