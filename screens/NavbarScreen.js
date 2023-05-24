@@ -19,7 +19,7 @@ export default function NavbarScreen() {
 
   const user = useSelector((state) => state.user.value);
 
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState("");
 
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -31,7 +31,7 @@ export default function NavbarScreen() {
     setModalVisible(false);
   };
 
-  console.log(userData);
+  console.log(userData.ville, "bonjour");
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
@@ -40,14 +40,13 @@ export default function NavbarScreen() {
         setUserData(data.user);
       });
   }, []);
-
-  let city = <Text style={styles.ville}>Choisissez une ville</Text>;
-  if (userData.ville === null) {
-    city;
+  let city;
+  if (userData.ville === "") {
+    city = <Text style={styles.ville}>Choisissez une ville</Text>;
   } else {
     city = <Text style={styles.ville}>{userData.ville}</Text>;
   }
-
+  //s
   return (
     <SafeAreaView style={styles.navbar}>
       <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>
