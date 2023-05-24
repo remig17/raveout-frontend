@@ -32,7 +32,6 @@ export default function HomeScreen({ navigation }) {
         if (data && data.like && data.like.length > 0) {
           // console.log(data);
           dispatch(importDatabase(data.like));
-          
         }
       });
   }, []);
@@ -59,9 +58,10 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <>
-      <NavbarScreen style={styles.navbar}></NavbarScreen>
-{/*       <DateSlider></DateSlider>
- */}      <TouchableOpacity
+      <NavbarScreen></NavbarScreen>
+      {/*       <DateSlider></DateSlider>
+       */}
+      <TouchableOpacity
         style={styles.clear}
         onPress={() => {
           dispatch(clearEvent());
@@ -72,9 +72,8 @@ export default function HomeScreen({ navigation }) {
       <SafeAreaView style={styles.all}>
         <ScrollView>
           <Text style={styles.intro}>A VENIR: </Text>
-       
+
           <View style={styles.main}>{events}</View>
-         
         </ScrollView>
       </SafeAreaView>
     </>
