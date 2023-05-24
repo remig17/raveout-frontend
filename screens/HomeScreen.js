@@ -12,7 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useDispatch, useSelector } from "react-redux";
 import { clearEvent, importDatabase } from "../reducers/event";
-
+/* import DateSlider from "../components/DateSlider";
+ */
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
   const dispatch = useDispatch();
@@ -59,8 +60,9 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <NavbarScreen style={styles.navbar}></NavbarScreen>
-      <TouchableOpacity
-        class={styles.clear}
+{/*       <DateSlider></DateSlider>
+ */}      <TouchableOpacity
+        style={styles.clear}
         onPress={() => {
           dispatch(clearEvent());
         }}
@@ -70,8 +72,9 @@ export default function HomeScreen({ navigation }) {
       <SafeAreaView style={styles.all}>
         <ScrollView>
           <Text style={styles.intro}>A VENIR: </Text>
-
+       
           <View style={styles.main}>{events}</View>
+         
         </ScrollView>
       </SafeAreaView>
     </>
@@ -97,7 +100,6 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   clear: {
-    color: "red",
     width: 20,
     backgroundColor: "white",
     marginTop: 50,
