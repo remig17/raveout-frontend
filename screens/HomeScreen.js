@@ -17,8 +17,8 @@ export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const event = useSelector((state) => state.event.value);
-  const likedEvents = event.likedEvents;
+  const [isLiked, setIsLiked] = useState(false);
+
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
