@@ -7,13 +7,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/intro.gif",
+      "image": "./assets/splash.gif",
       "resizeMode": "cover",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#262626"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

@@ -12,6 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useSelector } from "react-redux";
 import Event from "../components/Event";
+import Moment from "moment";
+import "moment/locale/fr";
 
 export default function EventScreen() {
   const [eventsData, setEventsData] = useState([]);
@@ -25,9 +27,11 @@ export default function EventScreen() {
       });
   }, []);
 
+  Moment.locale("fr");
+
   return (
     <>
-      <NavbarScreen style={styles.navbar}></NavbarScreen>
+      <NavbarScreen></NavbarScreen>
       <SafeAreaView style={styles.content}>
         {eventsData.photo && (
           <Event
@@ -35,7 +39,9 @@ export default function EventScreen() {
             photo={eventsData.photo}
             name={eventsData.name}
             lieu={eventsData.lieu}
-            date_debut={eventsData.date_debut}
+            date_debut={Moment(eventsData.date_debut).format(
+              "ddd D MMM [à] HH[h]"
+            )}
             tags={eventsData.tags}
             _id={eventsData._id}
             description={eventsData.description}
