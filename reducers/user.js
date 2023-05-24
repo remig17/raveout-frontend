@@ -35,7 +35,6 @@ export const userSlice = createSlice({
     },
     updatePhotoUri: (state, action) => {
       state.value.avatar = action.payload;
-      console.log("updatePhotoUri", action.payload);
     },
   },
 });
