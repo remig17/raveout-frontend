@@ -19,7 +19,6 @@ export default function HomeScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(false);
 
-
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
       .then((response) => response.json())
@@ -30,7 +29,7 @@ export default function HomeScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data && data.like && data.like.length > 0) {
-          console.log(data);
+          // console.log(data);
           dispatch(importDatabase(data.like));
         }
       });

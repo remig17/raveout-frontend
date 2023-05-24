@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Camera, CameraType, FlashMode } from "expo-camera";
 import { useDispatch } from "react-redux";
-import { addPhoto, updatePhotoUri } from "../reducers/user";
+import { updatePhotoUri } from "../reducers/user";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useIsFocused } from "@react-navigation/native";
 import { PORT } from "@env";
+import { useNavigation } from "@react-navigation/native";
 
-export default function SnapScreen() {
+export default function EditPhotoScreen() {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
@@ -40,7 +42,9 @@ export default function SnapScreen() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("data.url", data.url);
         data.result && dispatch(updatePhotoUri(data.url));
+        navigation.navigate("Profile", { avatar: data.url });
       });
   };
 

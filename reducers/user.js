@@ -7,7 +7,7 @@ const initialState = {
     email: null,
     tags: [],
     likedEvents: [],
-    photoUri: null,
+    avatar: null,
     ville: null,
   },
 };
@@ -20,6 +20,7 @@ export const userSlice = createSlice({
       state.value.token = action.payload.token;
       state.value.pseudo = action.payload.pseudo;
       state.value.email = action.payload.email;
+      state.value.avatar = action.payload.avatar;
     },
     logout: (state) => {
       state.value.token = null;
@@ -33,7 +34,7 @@ export const userSlice = createSlice({
       state.value.ville = action.payload.ville;
     },
     updatePhotoUri: (state, action) => {
-      state.value.photoUri = action.payload;
+      state.value.avatar = action.payload;
       console.log("updatePhotoUri", action.payload);
     },
   },

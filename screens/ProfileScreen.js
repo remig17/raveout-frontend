@@ -10,14 +10,16 @@ import {
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import NavbarScreen from "./NavbarScreen";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { PORT } from "@env";
 import EditProfileModal from "../components/EditProfileModal";
 import { useNavigation } from "@react-navigation/native";
+import { updatePhotoUri } from "../reducers/user";
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
 
   const user = useSelector((state) => state.user.value);
@@ -48,7 +50,7 @@ export default function ProfileScreen() {
           <TouchableOpacity onPress={() => navigation.navigate("EditPhoto")}>
             <Image
               style={styles.avatarPhoto}
-              source={require("../assets/avatar.png")}
+              source={{ uri: user.avatar }}
             ></Image>
           </TouchableOpacity>
           <Text style={styles.pseudo}>{user.pseudo}</Text>

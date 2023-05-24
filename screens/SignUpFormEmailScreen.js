@@ -30,8 +30,10 @@ export default function SignUpFormEmailScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("'''", data);
-        console.log("'''", data.token);
+        // console.log("''data'", data);
+        // console.log("'''", data.token);
+
+        console.log("avatar test", data);
 
         if (data.result) {
           dispatch(
@@ -39,6 +41,7 @@ export default function SignUpFormEmailScreen({ navigation }) {
               pseudo: signUpPseudo,
               token: data.token,
               email: signUpEmail,
+              avatar: data.avatar,
             })
           );
           setSignUpPseudo("");
