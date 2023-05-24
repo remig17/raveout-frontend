@@ -19,6 +19,7 @@ const EditCityModal = ({ visible, onClose }) => {
   const dispatch = useDispatch();
   const [userCity, setUserCity] = useState("");
 
+  //
   const navigation = useNavigation();
   console.log(userCity, "city data");
   useEffect(() => {
@@ -44,7 +45,7 @@ const EditCityModal = ({ visible, onClose }) => {
       .then((response) => response.json())
       .then((data) => {
         // if (data.modifiedCount > 0) {
-        dispatch(ville({ ville: ville }));
+        dispatch(ville(userCity));
 
         onClose();
       });
