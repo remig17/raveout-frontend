@@ -46,11 +46,10 @@ export default function NavbarScreen() {
   } else {
     city = <Text style={styles.ville}>{userData.ville}</Text>;
   }
-  //s
   return (
     <SafeAreaView style={styles.navbar}>
       <TouchableOpacity style={styles.modifyBtn} onPress={handleOpenModal}>
-        {city}
+        <Text>{city}</Text>
       </TouchableOpacity>
       <EditCityModal visible={isModalVisible} onClose={handleCloseModal} />
       <View style={styles.centerContainer}>

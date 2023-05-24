@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import NavbarScreen from "./NavbarScreen";
-import Card from "../components/Card";
+ import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
@@ -59,8 +59,8 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <>
-      <NavbarScreen style={styles.navbar}></NavbarScreen>
-{/*       <DateSlider></DateSlider>
+     <NavbarScreen></NavbarScreen>
+ {/*       <DateSlider></DateSlider>
  */}      <TouchableOpacity
         style={styles.clear}
         onPress={() => {
