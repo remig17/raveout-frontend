@@ -14,8 +14,10 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { PORT } from "@env";
 import EditProfileModal from "../components/EditProfileModal";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen() {
+  const navigation = useNavigation();
   const [userData, setUserData] = useState([]);
 
   const user = useSelector((state) => state.user.value);
@@ -43,7 +45,7 @@ export default function ProfileScreen() {
       <NavbarScreen></NavbarScreen>
       <TouchableOpacity>
         <View style={styles.content}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("EditPhoto")}>
             <Image
               style={styles.avatarPhoto}
               source={require("../assets/avatar.png")}
