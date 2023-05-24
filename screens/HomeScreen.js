@@ -11,11 +11,16 @@ import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useDispatch, useSelector } from "react-redux";
-import { clearEvent } from "../reducers/event";
+import { clearEvent, importDatabase } from "../reducers/event";
 
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  const event = useSelector((state) => state.event.value);
+  const likedEvents = event.likedEvents;
+
+
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -23,11 +28,24 @@ export default function HomeScreen({ navigation }) {
       .then((data) => {
         setEventsData(data.event);
       });
+      fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.like && data.like.length > 0) {
+          console.log(data);
+          dispatch(importDatabase(data.like))
+          
+        }
+      });
   }, []);
+
+
 
   const events = eventsData.map((data, i) => {
     console.log(data.tags);
-
+    
+ const isLiked = likedEvents.some((event) => event.name === data.name);
+ 
     const tags = Array.isArray(data.tags) ? data.tags : String(data.tags).split(" ");
     return (
       <Card
@@ -38,7 +56,8 @@ export default function HomeScreen({ navigation }) {
         date_debut={data.date_debut}
         tags={tags}
         _id={data._id}
-      />
+        isLiked={isLiked}
+     />
     );
   });
 

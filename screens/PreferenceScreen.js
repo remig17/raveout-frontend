@@ -35,7 +35,7 @@ export default function PreferenceScreen({ navigation }) {
           console.log(data)
           if (data.result) {
             dispatch(addTags(selectedButtons));
-            navigation.navigate("Home");
+            navigation.navigate("TabNavigator");
           } else {
             setErrorMessage("Veuillez sélectionner exactement trois styles.");
           }

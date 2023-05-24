@@ -16,24 +16,24 @@ export default function Card(props) {
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(props.isLiked);
 
-  const handleLike = () => {
-    fetch(`http://${PORT}:3000/users/like`, {
+  const handleLike = async () => {
+    const response = await fetch(`http://${PORT}:3000/users/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, eventId: props._id }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          if (isLiked) {
-            dispatch(removeEventFromLike(props));
-          } else {
-            dispatch(addEventToLike(props));
-          }
-          setIsLiked(!isLiked);
-        }
-      });
+    });
+    const data = await response.json();
+    if (data.result) {
+      if (isLiked) {
+        dispatch(removeEventFromLike(props));
+      } else {
+        dispatch(addEventToLike(props));
+        setIsLiked(!isLiked);
+      }
+      
+    }
   };
+  
 
   const handleClick = () => {
     dispatch(getEventById(props._id));
@@ -60,7 +60,7 @@ export default function Card(props) {
             </View>
             <TouchableOpacity
               onPress={() => {
-                handleLike("remove");
+                handleLike();
               }}
             >
               <FontAwesome

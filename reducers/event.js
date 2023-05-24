@@ -22,10 +22,13 @@ export const userSlice = createSlice({
     },
     clearEvent: (state) => {
       state.value.likedEvents = []
+    },
+    importDatabase: (state, action) => {
+      state.value.likedEvents = action.payload;
     }
   },
 });
 
-export const { addEventToLike, removeEventFromLike, getEventById, clearEvent} =
+export const { addEventToLike, removeEventFromLike, getEventById, clearEvent, importDatabase} =
   userSlice.actions;
 export default userSlice.reducer;

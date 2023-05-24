@@ -13,35 +13,28 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
 import { useSelector } from "react-redux";
 import { clearEvent } from "../reducers/event";
+import { useState } from "react";
 
 export default function LikeScreen({ navigation }) {
-  const user = useSelector((state) => state.user.value);
   const event = useSelector((state) => state.event.value);
   const likedEvents = event.likedEvents;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && data.like && data.like.length > 0) {
-          console.log(data);
-        }
-      });
-  }, []);
+
 
   const handleBrowse = () => {
-    navigation.navigate("TabNavigator");
     dispatch(clearEvent()); // Réinitialiser les événements aimés
+    navigation.navigate("TabNavigator");
   };
+  
 
   let likes;
 
-  if (event.likedEvents.length > 0) {
-    likes = event.likedEvents.map((data, i) => {
-      const isLiked = likedEvents.some((event) => event.name === data.name);
+  if (likedEvents.length > 0) {
+    likes = likedEvents.map((data, i) => {
+      const isLiked = true; // L'événement est toujours considéré comme aimé dans la section LikeScreen
       const tags = Array.isArray(data.tags) ? data.tags : String(data.tags).split(" ");
-
+  
       return (
         <Card
           key={i}
