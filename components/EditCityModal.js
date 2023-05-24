@@ -21,12 +21,11 @@ const EditCityModal = ({ visible, onClose }) => {
 
   //
   const navigation = useNavigation();
-  console.log(userCity, "city data");
+
   useEffect(() => {
     fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, "c la data");
         setUserCity(data.user);
       });
   }, []);
@@ -56,7 +55,6 @@ const EditCityModal = ({ visible, onClose }) => {
         <Text style={styles.title}>Modifier Ville</Text>
         <TextInput
           placeholder="Ville"
-          value={ville}
           onChangeText={setUserCity}
           style={styles.input}
         />
