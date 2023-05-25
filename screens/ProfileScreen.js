@@ -16,7 +16,9 @@ import { PORT } from "@env";
 import EditProfileModal from "../components/EditProfileModal";
 import { useNavigation } from "@react-navigation/native";
 import { updatePhotoUri } from "../reducers/user";
+import { clearEvent } from "../reducers/event";
 import UserAvatar from "react-native-user-avatar";
+
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
@@ -24,6 +26,7 @@ export default function ProfileScreen() {
   const [userData, setUserData] = useState([]);
 
   const user = useSelector((state) => state.user.value);
+  const event = useSelector((state) => state.event.value);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleOpenModal = () => {
@@ -41,6 +44,11 @@ export default function ProfileScreen() {
         setUserData(data.user);
       });
   }, []);
+
+  const logout = () => {
+    dispatch(clearEvent())
+    navigation.navigate("SignUpSignIn")
+  }
 
   return (
     <View style={styles.main}>
@@ -88,6 +96,12 @@ export default function ProfileScreen() {
               style={styles.passedEventPhoto}
               source={require("../assets/events/newrave.png")}
             ></Image>
+          </View>
+
+          <View style={styles.logoutcontainer}>
+            <TouchableOpacity onPress={() => {logout()}}>
+              <Text style={styles.logoutText}>Se déconnecter</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
@@ -175,4 +189,15 @@ const styles = StyleSheet.create({
     height: 105,
     marginLeft: 5,
   },
+  logoutcontainer: {
+    marginTop: 100,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+  logoutText: {
+    color: "red",
+    fontFamily: "PoppinsSemiBold",
+    fontSize: 18,
+  }
 });

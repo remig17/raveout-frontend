@@ -30,9 +30,9 @@ export default function TicketScreen() {
   const ticketsList = event.tickets;
   let tickets;
 
-  // const clear = () => {
-  //   dispatch(clearTicket());
-  // };
+  const clear = () => {
+    dispatch(clearTicket());
+  };
 
   if (ticketsList.length > 0) {
     tickets = ticketsList.map((data, i) => {

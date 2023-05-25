@@ -36,11 +36,16 @@ export default function EventScreen() {
 
   Moment.locale("fr");
 
+  const tags = Array.isArray(eventsData.tags)
+    ? eventsData.tags
+    : String(eventsData.tags).split(" ");
+
+
   return (
     <>
       <NavbarScreen></NavbarScreen>
       <SafeAreaView style={styles.content}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
           {eventsData.photo && (
             <Event
               style={styles.event}
@@ -50,7 +55,7 @@ export default function EventScreen() {
               date_debut={Moment(eventsData.date_debut).format(
                 "ddd D MMM [à] HH[h]"
               )}
-              tags={eventsData.tags}
+              tags={tags}
               _id={eventsData._id}
               description={eventsData.description}
               organisateur={eventsData.organisateur}
@@ -81,8 +86,14 @@ const styles = StyleSheet.create({
   content: {
     height: "100%",
     backgroundColor: "#262626",
+    marginBottom: 150,
+
   },
   event: {
     backgroundColor: "#262626",
   },
+  scrollViewContent: {
+    marginBottom: 300,
+  },
+ 
 });

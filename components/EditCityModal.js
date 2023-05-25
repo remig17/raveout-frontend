@@ -45,23 +45,24 @@ const EditCityModal = ({ visible, onClose }) => {
       .then((data) => {
         // if (data.modifiedCount > 0) {
         dispatch(ville(userCity));
-
-        onClose();
+      onClose()        
       });
   };
   return (
     <Modal visible={visible} onRequestClose={onClose} style={styles.modal}>
       <View style={styles.container}>
-        <Text style={styles.title}>Modifier Ville</Text>
+        <Text style={styles.title}>Modifier sa ville</Text>
         <TextInput
           placeholder="Ville"
           onChangeText={setUserCity}
           style={styles.input}
         />
-        <TouchableOpacity style={styles.save} onPress={handleSave}>
-          <Text style={styles.textbtn}>Enregistrer</Text>
-        </TouchableOpacity>
-      </View>
+        <View>
+          <TouchableOpacity style={styles.save} onPress={handleSave}>
+            <Text style={styles.textbtn}>Enregistrer</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
     </Modal>
   );
 };
@@ -71,17 +72,17 @@ export default EditCityModal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-    width: "100%",
+    flexDirection: "column",
     backgroundColor: "#262626",
     justifyContent: "center",
-    alignContent: "center",
+    alignItems: "center",
   },
   title: {
     fontFamily: "PoppinsBold",
     color: "white",
     textAlign: "center",
-    marginTop: 150,
+    marginBottom: 50,
+    fontSize: 18,
   },
   input: {
     // flex: 0.5,
@@ -107,5 +108,6 @@ const styles = StyleSheet.create({
   textbtn: {
     color: "white",
     padding: 10,
+    flexDirection: "row",
   },
 });
