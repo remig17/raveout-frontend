@@ -45,7 +45,8 @@ export default function HomeScreen({ navigation }) {
   };
 
   const filteredEvents = eventsData.filter((event) => {
-    if (selectedDate === null) { // Show all events when "All" option is selected
+    if (selectedDate === null) {
+      // Show all events when "All" option is selected
       return true;
     } else {
       const eventDate = new Date(event.date_debut);
