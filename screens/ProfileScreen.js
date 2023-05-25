@@ -16,7 +16,7 @@ import { PORT } from "@env";
 import EditProfileModal from "../components/EditProfileModal";
 import { useNavigation } from "@react-navigation/native";
 import { updatePhotoUri } from "../reducers/user";
-import { clearEvent } from "../reducers/event";
+import { clearEvent, clearTicket } from "../reducers/event";
 import UserAvatar from "react-native-user-avatar";
 
 
@@ -47,6 +47,7 @@ export default function ProfileScreen() {
 
   const logout = () => {
     dispatch(clearEvent())
+    dispatch(clearTicket())
     navigation.navigate("SignUpSignIn")
   }
 
