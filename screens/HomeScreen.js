@@ -48,18 +48,12 @@ export default function HomeScreen({ navigation }) {
   const filteredEvents = eventsData.filter((event) => {
     if (selectedDate === null) {
       // Afficher tous les événements lorsque "All" est sélectionné
-    if (selectedDate === null) {
-      // Show all events when "All" option is selected
       return true;
     } else {
       const eventDate = new Date(event.date_debut);
       return isSameDay(eventDate, selectedDate);
     }
   });
-
-  const events = filteredEvents.map((data, i) => {
-
-  
 
   const events = eventsData.map((data, i) => {
     Moment.locale("fr");
