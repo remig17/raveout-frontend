@@ -7,6 +7,10 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
 } from "react-native";
 import { PORT } from "@env";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,34 +44,41 @@ const EditProfileModal = ({ visible, onClose }) => {
       });
   };
   return (
-    <Modal visible={visible} onRequestClose={onClose}>
-      <View style={styles.container}>
-        <Text style={styles.title}>MODIFIER VOS INFORMATIONS</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Pseudo"
-            value={pseudo}
-            onChangeText={setPseudo}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Description"
-            value={description}
-            onChangeText={setDescription}
-            style={styles.input}
-          />
-          <TouchableOpacity style={styles.save} onPress={handleSave}>
-            <Text style={styles.textbtn}>Enregistrer</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Modal>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Modal visible={visible} onRequestClose={onClose}>
+          <View style={styles.container}>
+            <Text style={styles.title}>MODIFIER VOS INFORMATIONS</Text>
+            <View style={styles.inputContainer}>
+              <TextInput
+                placeholder="Pseudo"
+                value={pseudo}
+                onChangeText={setPseudo}
+                style={styles.input}
+              />
+              <TextInput
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+                style={styles.input}
+              />
+              <TextInput
+                placeholder="Description"
+                value={description}
+                onChangeText={setDescription}
+                style={styles.input}
+              />
+              <TouchableOpacity style={styles.save} onPress={handleSave}>
+                <Text style={styles.textbtn}>Enregistrer</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

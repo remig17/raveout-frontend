@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     alignContent: "center",
-    width: 350,
+    width: "100%",
     height: 200,
     marginBottom: 80,
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#262626",
     justifyContent: "center",
-    alignContent: "center",
+    paddingLeft: 10,
   },
   name: {
     fontFamily: "PoppinsBold",

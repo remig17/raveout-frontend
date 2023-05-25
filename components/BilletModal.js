@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 export function BilletModal({ isModalVisible, onClose }) {
+  const navigation = useNavigation();
   return (
     <SafeAreaView>
       <Modal visible={isModalVisible} animationType="slide">
@@ -22,11 +24,14 @@ export function BilletModal({ isModalVisible, onClose }) {
             <Text style={styles.textContent}>
               Votre billet a bien été ajouté !
             </Text>
-          </View>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.billetBtn}>
-              <Text style={styles.btnText}>Voir mon billet</Text>
-            </TouchableOpacity>
+            <View style={styles.btnContainer}>
+              <TouchableOpacity
+                style={styles.billetBtn}
+                onPress={() => navigation.navigate("Ticket")}
+              >
+                <Text style={styles.btnText}>Voir mon/mes billet(s)</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -64,6 +69,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#7C4DFF",
     borderRadius: 5,
     width: 120,
+    padding: 10,
+    marginLeft: 35,
+    marginTop: 15,
   },
   btnText: {
     color: "white",

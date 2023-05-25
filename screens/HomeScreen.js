@@ -22,7 +22,8 @@ export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -46,6 +47,8 @@ export default function HomeScreen({ navigation }) {
 
   const filteredEvents = eventsData.filter((event) => {
     if (selectedDate === null) {
+      // Afficher tous les événements lorsque "All" est sélectionné
+    if (selectedDate === null) {
       // Show all events when "All" option is selected
       return true;
     } else {
@@ -54,12 +57,14 @@ export default function HomeScreen({ navigation }) {
     }
   });
 
+  const events = filteredEvents.map((data, i) => {
+
   
 
   const events = eventsData.map((data, i) => {
     Moment.locale("fr");
     const formattedDate = Moment(data.date_debut).format("ddd D MMM [à] HH[h]");
-    console.log(data.tags);
+    // console.log(data.tags);
 
     const tags = Array.isArray(data.tags)
       ? data.tags
@@ -111,7 +116,6 @@ const styles = StyleSheet.create({
   },
   all: {
     backgroundColor: "#262626",
-    marginBottom: 100,
   },
   intro: {
     fontFamily: "PoppinsBold",
@@ -124,5 +128,8 @@ const styles = StyleSheet.create({
     width: 20,
     backgroundColor: "white",
     marginTop: 50,
+  },
+  main: {
+    backgroundColor: "#262626",
   },
 });

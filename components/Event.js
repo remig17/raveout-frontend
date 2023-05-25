@@ -13,6 +13,7 @@ import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
 import { BilletModal } from "../components/BilletModal";
+import { addTicket } from "../reducers/event";
 
 export default function Event(props) {
   const navigation = useNavigation();
@@ -30,6 +31,12 @@ export default function Event(props) {
     } else {
       dispatch(addEventToLike(props));
     }
+  };
+
+  const click = () => {
+    dispatch(addTicket(props));
+    handleOpenModal();
+    console.log(props.name);
   };
 
   const handleLike = () => {
@@ -68,7 +75,9 @@ export default function Event(props) {
                 </Text>
                 <TouchableOpacity
                   style={styles.btnBillet}
-                  onPress={handleOpenModal}
+                  onPress={() => {
+                    click();
+                  }}
                 >
                   <Text style={styles.textBtn}>Billet</Text>
                 </TouchableOpacity>
@@ -94,8 +103,12 @@ export default function Event(props) {
             </View>
           </View>
           <View style={styles.tagsContainer}>
-            <Text style={styles.tags}>{props.tags}</Text>
-          </View>
+          {props.tags.map((tag, index) => (
+            <TouchableOpacity key={index} style={styles.btntag}>
+              <Text style={styles.tagText}>#{tag}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
           <Text style={styles.description}>{props.description}</Text>
         </View>
       </View>
@@ -162,16 +175,19 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsRegular",
   },
   tagsContainer: {
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
-  tags: {
-    fontFamily: "PoppinsBold",
+  tagText: {
+    fontFamily: "PoppinsSemiBold",
     color: "white",
     marginTop: 10,
+    marginRight: 5,
   },
   description: {
     color: "white",
+    marginTop: 20,
   },
 
   lieudate: {
