@@ -23,6 +23,8 @@ export default function HomeScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isEmpty, setIsEmpty] = useState(false);
+
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -89,7 +91,7 @@ export default function HomeScreen({ navigation }) {
         <Text>CLEAR</Text>
       </TouchableOpacity> */}
       <SafeAreaView style={styles.all}>
-        <ScrollView>
+        <ScrollView >
           <Text style={styles.intro}>A VENIR: </Text>
 
           <View style={styles.main}>{events}</View>
@@ -122,4 +124,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: 50,
   },
+  main: {
+    backgroundColor: "#262626",
+
+  }
 });

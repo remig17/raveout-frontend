@@ -94,8 +94,12 @@ export default function Event(props) {
             </View>
           </View>
           <View style={styles.tagsContainer}>
-            <Text style={styles.tags}>{props.tags}</Text>
-          </View>
+          {props.tags.map((tag, index) => (
+            <TouchableOpacity key={index} style={styles.btntag}>
+              <Text style={styles.tagText}>#{tag}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
           <Text style={styles.description}>{props.description}</Text>
         </View>
       </View>
@@ -162,16 +166,19 @@ const styles = StyleSheet.create({
     fontFamily: "PoppinsRegular",
   },
   tagsContainer: {
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
-  tags: {
-    fontFamily: "PoppinsBold",
+  tagText: {
+    fontFamily: "PoppinsSemiBold",
     color: "white",
     marginTop: 10,
+    marginRight: 5,
   },
   description: {
     color: "white",
+    marginTop: 20,
   },
 
   lieudate: {
