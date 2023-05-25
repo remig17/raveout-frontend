@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
   },
   all: {
     backgroundColor: "#262626",
-    marginBottom: 100,
   },
   intro: {
     fontFamily: "PoppinsBold",
