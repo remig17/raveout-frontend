@@ -23,6 +23,7 @@ export default function Card(props) {
         <Text style={styles.name}>{props.name}</Text>
         <Text style={styles.lieu}>{props.lieu}</Text>
         <Text style={styles.datedebut}>{props.date_debut}</Text>
+        <Text style={styles.telecharger}>Télécharger votre ticket</Text>
       </View>
     </View>
   );
