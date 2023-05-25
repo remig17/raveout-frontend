@@ -13,6 +13,7 @@ import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
 import { BilletModal } from "../components/BilletModal";
+import { addTicket } from "../reducers/event";
 
 export default function Event(props) {
   const navigation = useNavigation();
@@ -30,6 +31,12 @@ export default function Event(props) {
     } else {
       dispatch(addEventToLike(props));
     }
+  };
+
+  const click = () => {
+    dispatch(addTicket(props));
+    handleOpenModal();
+    console.log(props.name);
   };
 
   const handleLike = () => {
@@ -68,7 +75,9 @@ export default function Event(props) {
                 </Text>
                 <TouchableOpacity
                   style={styles.btnBillet}
-                  onPress={handleOpenModal}
+                  onPress={() => {
+                    click();
+                  }}
                 >
                   <Text style={styles.textBtn}>Billet</Text>
                 </TouchableOpacity>
