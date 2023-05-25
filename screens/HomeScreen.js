@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -45,13 +45,14 @@ export default function HomeScreen({ navigation }) {
   };
 
   const filteredEvents = eventsData.filter((event) => {
-    if (selectedDate === null) { // Show all events when "All" option is selected
+    if (selectedDate === null) { // Afficher tous les événements lorsque "All" est sélectionné
       return true;
     } else {
       const eventDate = new Date(event.date_debut);
       return isSameDay(eventDate, selectedDate);
     }
   });
+  
   const events = filteredEvents.map((data, i) => {
     Moment.locale("fr");
     const formattedDate = Moment(data.date_debut).format("ddd D MMM [à] HH[h]");

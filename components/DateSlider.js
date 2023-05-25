@@ -5,6 +5,7 @@ import { addDays, format, getDate, isSameDay, startOfWeek } from 'date-fns';
 
 function DateSlider({ onDateSelect }) {
   const [week, setWeek] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const weekDays = getWeekDays(new Date());
@@ -13,11 +14,8 @@ function DateSlider({ onDateSelect }) {
   }, []);
 
   const handleDateChange = (newDate) => {
-    if (newDate === null) { // If "All" option is selected
-      onDateSelect(null); // Pass null to indicate showing all events
-    } else {
-      onDateSelect(newDate);
-    }
+    setSelectedDate(newDate); // Utilisez setSelectedDate pour mettre à jour la date sélectionnée
+    onDateSelect(newDate); // Appeler la fonction de rappel onDateSelect avec la nouvelle date sélectionnée
   };
 
   return (
