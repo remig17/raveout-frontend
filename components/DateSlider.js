@@ -8,11 +8,16 @@ function DateSlider({ onDateSelect }) {
 
   useEffect(() => {
     const weekDays = getWeekDays(new Date());
-    setWeek(weekDays);
+    const allOption = { formatted: 'All', date: null, day: null };
+    setWeek([allOption, ...weekDays]); // Add the "All" option to the week state
   }, []);
 
   const handleDateChange = (newDate) => {
-    onDateSelect(newDate);
+    if (newDate === null) { // If "All" option is selected
+      onDateSelect(null); // Pass null to indicate showing all events
+    } else {
+      onDateSelect(newDate);
+    }
   };
 
   return (
@@ -22,7 +27,7 @@ function DateSlider({ onDateSelect }) {
         const touchable = [styles.touchable];
 
         const sameDay = isSameDay(weekDay.date, new Date());
-        if (sameDay) {
+        if (sameDay || weekDay.date === null) { // Highlight the "All" option if selected
           textStyles.push(styles.selectedLabel);
           touchable.push(styles.selectedTouchable);
         }
@@ -42,6 +47,7 @@ function DateSlider({ onDateSelect }) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

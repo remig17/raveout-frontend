@@ -45,11 +45,14 @@ export default function HomeScreen({ navigation }) {
   };
 
   const filteredEvents = eventsData.filter((event) => {
-    const eventDate = new Date(event.date_debut);
-    return isSameDay(eventDate, selectedDate);
+    if (selectedDate === null) { // Show all events when "All" option is selected
+      return true;
+    } else {
+      const eventDate = new Date(event.date_debut);
+      return isSameDay(eventDate, selectedDate);
+    }
   });
-
-  const events = eventsData.map((data, i) => {
+  const events = filteredEvents.map((data, i) => {
     Moment.locale("fr");
     const formattedDate = Moment(data.date_debut).format("ddd D MMM [à] HH[h]");
     console.log(data.tags);
