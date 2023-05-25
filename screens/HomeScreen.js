@@ -53,7 +53,10 @@ export default function HomeScreen({ navigation }) {
       return isSameDay(eventDate, selectedDate);
     }
   });
-  const events = filteredEvents.map((data, i) => {
+
+  
+
+  const events = eventsData.map((data, i) => {
     Moment.locale("fr");
     const formattedDate = Moment(data.date_debut).format("ddd D MMM [à] HH[h]");
     console.log(data.tags);
