@@ -12,12 +12,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { PORT } from "@env";
 import { addEventToLike, removeEventFromLike } from "../reducers/event";
 import { useNavigation } from "@react-navigation/native";
+import { BilletModal } from "../components/BilletModal";
 
 export default function Event(props) {
   const navigation = useNavigation();
   const [isLiked, setIsLiked] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+
+  const handleOpenModal = () => {
+    props.onBilletPress();
+  };
 
   const updateLikedEvents = () => {
     if (isLiked) {
@@ -43,56 +48,58 @@ export default function Event(props) {
       });
   };
   return (
-    <ScrollView style={styles.scroll} >
-    <View style={styles.card}>
-      <View style={styles.photocontainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Event")}
-        >
-          <Image
-            style={styles.photo}
-            source={{ uri: `${props.photo}` }}
-          ></Image>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.descriptioncontainer}>
-        <Text style={styles.name}>{props.name}</Text>
-        <View>
-          <View style={styles.heartcontainer}>
-            <View>
-              <Text style={styles.organisateur}>Par {props.organisateur}</Text>
-              <TouchableOpacity style={styles.btnBillet}>
-                <Text style={styles.textBtn}>Billet</Text>
-              </TouchableOpacity>
-              
-            </View>
-            <View style={styles.lieudate}>
+    <>
+      <View style={styles.card}>
+        <View style={styles.photocontainer}>
+          <TouchableOpacity onPress={() => navigation.navigate("Event")}>
+            <Image
+              style={styles.photo}
+              source={{ uri: `${props.photo}` }}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.descriptioncontainer}>
+          <Text style={styles.name}>{props.name}</Text>
+          <View>
+            <View style={styles.heartcontainer}>
               <View>
-            <Text style={styles.lieu}>{props.lieu}</Text>
-              <Text style={styles.datedebut}>{props.date_debut}</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => {
-                handleLike();
-              }}
-            >
-              <FontAwesome
-                name={isLiked ? "heart" : "heart-o"} // Utiliser un cœur rempli ou vide en fonction de l'état du like
-                size={20}
-                color={"#7C4DFF"} // Utiliser une couleur différente pour le like aimé ou non aimé
-                style={styles.likeIcon}
-              />
-            </TouchableOpacity>
+                <Text style={styles.organisateur}>
+                  Par {props.organisateur}
+                </Text>
+                <TouchableOpacity
+                  style={styles.btnBillet}
+                  onPress={handleOpenModal}
+                >
+                  <Text style={styles.textBtn}>Billet</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.lieudate}>
+                <View>
+                  <Text style={styles.lieu}>{props.lieu}</Text>
+                  <Text style={styles.datedebut}>{props.date_debut}</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleLike();
+                  }}
+                >
+                  <FontAwesome
+                    name={isLiked ? "heart" : "heart-o"} // Utiliser un cœur rempli ou vide en fonction de l'état du like
+                    size={20}
+                    color={"#7C4DFF"} // Utiliser une couleur différente pour le like aimé ou non aimé
+                    style={styles.likeIcon}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
+          <View style={styles.tagsContainer}>
+            <Text style={styles.tags}>{props.tags}</Text>
+          </View>
+          <Text style={styles.description}>{props.description}</Text>
         </View>
-        <View style={styles.tagsContainer}>
-          <Text style={styles.tags}>{props.tags}</Text>
-        </View>
-        <Text style={styles.description}>{props.description}</Text>
       </View>
-    </View>
-    </ScrollView>
+    </>
   );
 }
 
@@ -166,7 +173,7 @@ const styles = StyleSheet.create({
   description: {
     color: "white",
   },
-  
+
   lieudate: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -179,5 +186,4 @@ const styles = StyleSheet.create({
     marginBottom: -150,
     paddingTop: 50,
   },
- 
 });

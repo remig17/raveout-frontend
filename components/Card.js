@@ -30,10 +30,8 @@ export default function Card(props) {
         dispatch(addEventToLike(props));
         setIsLiked(!isLiked);
       }
-      
     }
   };
-  
 
   const handleClick = () => {
     dispatch(getEventById(props._id));
@@ -75,12 +73,10 @@ export default function Card(props) {
         <View style={styles.tagsContainer}>
           {props.tags.map((tag, index) => (
             <TouchableOpacity key={index} style={styles.btntag}>
-            <Text  style={styles.tagText}>
-              #{tag}
-            </Text>
+              <Text style={styles.tagText}>#{tag}</Text>
             </TouchableOpacity>
           ))}
-</View>
+        </View>
       </View>
     </View>
   );
@@ -133,7 +129,7 @@ const styles = StyleSheet.create({
   tagText: {
     color: "#7C4DFF",
     fontFamily: "PoppinsSemiBold",
-    fontSize: 10,    
+    fontSize: 10,
   },
   btntag: {
     backgroundColor: "white",
@@ -147,6 +143,4 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginTop: 8,
   },
-  
-
 });

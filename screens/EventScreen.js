@@ -14,10 +14,17 @@ import { useSelector } from "react-redux";
 import Event from "../components/Event";
 import Moment from "moment";
 import "moment/locale/fr";
+import { BilletModal } from "../components/BilletModal";
 
 export default function EventScreen() {
   const [eventsData, setEventsData] = useState([]);
   const event = useSelector((state) => state.event.value);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showEventById/${event.eventId}`)
@@ -33,22 +40,31 @@ export default function EventScreen() {
     <>
       <NavbarScreen></NavbarScreen>
       <SafeAreaView style={styles.content}>
-        {eventsData.photo && (
-          <Event
-            style={styles.event}
-            photo={eventsData.photo}
-            name={eventsData.name}
-            lieu={eventsData.lieu}
-            date_debut={Moment(eventsData.date_debut).format(
-              "ddd D MMM [à] HH[h]"
-            )}
-            tags={eventsData.tags}
-            _id={eventsData._id}
-            description={eventsData.description}
-            organisateur={eventsData.organisateur}
-          />
-        )}
+        <ScrollView>
+          {eventsData.photo && (
+            <Event
+              style={styles.event}
+              photo={eventsData.photo}
+              name={eventsData.name}
+              lieu={eventsData.lieu}
+              date_debut={Moment(eventsData.date_debut).format(
+                "ddd D MMM [à] HH[h]"
+              )}
+              tags={eventsData.tags}
+              _id={eventsData._id}
+              description={eventsData.description}
+              organisateur={eventsData.organisateur}
+              onBilletPress={handleOpenModal}
+            />
+          )}
+        </ScrollView>
       </SafeAreaView>
+      {isModalVisible && (
+        <BilletModal
+          isVisible={isModalVisible}
+          onClose={() => setModalVisible(false)}
+        />
+      )}
     </>
   );
 }

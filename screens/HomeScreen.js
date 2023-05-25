@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import NavbarScreen from "./NavbarScreen";
- import Card from "../components/Card";
+import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PORT } from "@env";
@@ -14,15 +14,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearEvent, importDatabase } from "../reducers/event";
 import Moment from "moment";
 import "moment/locale/fr";
-import { isSameDay } from 'date-fns';
+import { isSameDay } from "date-fns";
 import DateSlider from "../components/DateSlider";
- 
+
 export default function HomeScreen({ navigation }) {
   const [eventsData, setEventsData] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const [isLiked, setIsLiked] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date()); 
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showAllEvent`)
@@ -74,8 +74,8 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <NavbarScreen></NavbarScreen>
-            <DateSlider  onDateSelect={handleDateSelect} />
-       
+      <DateSlider onDateSelect={handleDateSelect} />
+
       {/* <TouchableOpacity
         style={styles.clear}
         onPress={() => {
