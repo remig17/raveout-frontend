@@ -65,7 +65,7 @@ export default function TicketScreen() {
             <View style={styles.btnView}>
               <TouchableOpacity
                 style={styles.explorerBtn}
-                onPress={() => navigation.navigate("TabNavigator")}
+                onPress={() => navigation.navigate("Home")}
               >
                 <Text style={styles.btnText}>Découvrir</Text>
               </TouchableOpacity>
