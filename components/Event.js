@@ -111,6 +111,7 @@ export default function Event(props) {
           </View>
           <Text style={styles.description}>{props.description}</Text>
         </View>
+        <View style={styles.space}></View>
       </View>
     </>
   );
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   photocontainer: {
     width: "100%",
     height: "100%",
-    marginTop: 80,
+    
   },
   photo: {
     width: "100%",
@@ -202,4 +203,5 @@ const styles = StyleSheet.create({
     marginBottom: -150,
     paddingTop: 50,
   },
+ 
 });
