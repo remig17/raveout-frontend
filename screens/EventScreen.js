@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -7,14 +8,14 @@ import {
   Image,
 } from "react-native";
 import NavbarScreen from "./NavbarScreen";
-import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { PORT } from "@env";
 import { useSelector } from "react-redux";
 import Event from "../components/Event";
 import Moment from "moment";
 import "moment/locale/fr";
+import {PORT} from "@env"
 import { BilletModal } from "../components/BilletModal";
+import { useNavigation } from "@react-navigation/native";
 
 export default function EventScreen() {
   const [eventsData, setEventsData] = useState([]);
@@ -25,6 +26,8 @@ export default function EventScreen() {
   const handleOpenModal = () => {
     setModalVisible(true);
   };
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetch(`http://${PORT}:3000/events/showEventById/${event.eventId}`)
@@ -40,21 +43,28 @@ export default function EventScreen() {
     ? eventsData.tags
     : String(eventsData.tags).split(" ");
 
+    const goBack = () => {
+      navigation.navigate("TabNavigator")
+    }
 
   return (
-    <>
-      <NavbarScreen></NavbarScreen>
+    <View style={styles.all}>
+      <NavbarScreen />
+      <TouchableOpacity style={styles.return} onPress={() => {goBack()}}>
+        <Text style={styles.returnText}>◀ retour</Text>
+      </TouchableOpacity>
       <SafeAreaView style={styles.content}>
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <ScrollView
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+        >
           {eventsData.photo && (
             <Event
               style={styles.event}
               photo={eventsData.photo}
               name={eventsData.name}
               lieu={eventsData.lieu}
-              date_debut={Moment(eventsData.date_debut).format(
-                "ddd D MMM [à] HH[h]"
-              )}
+              date_debut={Moment(eventsData.date_debut).format("ddd D MMM [à] HH[h]")}
               tags={tags}
               _id={eventsData._id}
               description={eventsData.description}
@@ -70,16 +80,21 @@ export default function EventScreen() {
           onClose={() => setModalVisible(false)}
         />
       )}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+
+  all: {
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
   main: {
     flex: 1,
     backgroundColor: "black",
   },
-
   name: {
     color: "white",
   },
@@ -87,7 +102,6 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#262626",
     marginBottom: 150,
-
   },
   event: {
     backgroundColor: "#262626",
@@ -95,5 +109,13 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     marginBottom: 300,
   },
- 
+  return: {
+    backgroundColor: "#262626",
+    paddingBottom: -150,
+    paddingTop: 20,
+  },
+  returnText: {
+    color: "white",
+    fontSize: 24,
+  },
 });
