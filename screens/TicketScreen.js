@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#262626",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 600,
   },
   all: {
     backgroundColor: "#262626",
@@ -112,7 +113,9 @@ const styles = StyleSheet.create({
   noTicketContainer: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#262626",
+    paddingTop: 200,
   },
   noTicketTitre: {
     textAlign: "center",
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginTop: 15,
+    paddingBottom: 600,
   },
   explorerBtn: {
     marginTop: 15,
