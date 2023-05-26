@@ -6,7 +6,7 @@ import Moment from "moment";
 import "moment/locale/fr";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-export default function Card(props) {
+export default function Ticket(props) {
   const navigation = useNavigation();
   const user = useSelector((state) => state.user.value);
 
@@ -26,6 +26,18 @@ export default function Card(props) {
         <Text style={styles.datedebut}>{props.date_debut}</Text>
       </View>
       <View style={styles.iconesContainer}></View>
+      <FontAwesome
+        name={"download"}
+        size={20}
+        color={"#7C4DFF"}
+        style={styles.downloadIcon}
+      />
+      <FontAwesome
+        name={"share"}
+        size={20}
+        color={"#7C4DFF"}
+        style={styles.icon}
+      />
     </View>
   );
 }
@@ -64,5 +76,8 @@ const styles = StyleSheet.create({
   },
   iconesContainer: {
     flexDirection: "row",
+  },
+  downloadIcon: {
+    marginRight: 5,
   },
 });

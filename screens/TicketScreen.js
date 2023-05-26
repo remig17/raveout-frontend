@@ -11,10 +11,8 @@ import {
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import NavbarScreen from "./NavbarScreen";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Ticket from "../components/Ticket";
-import Card from "../components/Event";
 
 import Moment from "moment";
 import "moment/locale/fr";
@@ -30,23 +28,19 @@ export default function TicketScreen() {
   const ticketsList = event.tickets;
   let tickets;
 
-  const clear = () => {
-    dispatch(clearTicket());
-  };
+  // const clear = () => {
+  //   dispatch(clearTicket());
+  // };
 
   if (ticketsList.length > 0) {
     tickets = ticketsList.map((data, i) => {
-      Moment.locale("fr");
-      const formattedDate = Moment(data.date_debut, "DD/MM/YYYY").format(
-        "D MMM [à] HH[h]"
-      );
       return (
         <Ticket
           key={i}
           photo={data.photo}
           name={data.name}
           lieu={data.lieu}
-          date_debut={formattedDate}
+          date_debut={data.date_debut}
         />
       );
     });

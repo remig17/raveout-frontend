@@ -79,7 +79,7 @@ export default function Event(props) {
                     click();
                   }}
                 >
-                  <Text style={styles.textBtn}>Billet</Text>
+                  <Text style={styles.textBtn}>Réserver</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.lieudate}>
@@ -103,12 +103,12 @@ export default function Event(props) {
             </View>
           </View>
           <View style={styles.tagsContainer}>
-          {props.tags.map((tag, index) => (
-            <TouchableOpacity key={index} style={styles.btntag}>
-              <Text style={styles.tagText}>#{tag}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+            {props.tags.map((tag, index) => (
+              <TouchableOpacity key={index} style={styles.btntag}>
+                <Text style={styles.tagText}>#{tag}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
           <Text style={styles.description}>{props.description}</Text>
         </View>
       </View>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   },
   btnBillet: {
     marginTop: 15,
-    padding: 15,
+    padding: 10,
     width: 120,
     backgroundColor: "#7C4DFF",
     borderRadius: 10,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   textBtn: {
     fontFamily: "PoppinsSemiBold",
     color: "white",
-    paddingLeft: 25,
+    textAlign: "center",
   },
   lieu: {
     paddingTop: 15,
