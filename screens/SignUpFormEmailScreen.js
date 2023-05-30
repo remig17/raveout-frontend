@@ -19,7 +19,7 @@ export default function SignUpFormEmailScreen({ navigation }) {
   const [signUpPassword, setSignUpPassword] = useState("");
 
   const handleRegister = () => {
-    fetch(`http://${PORT}:3000/users/signup`, {
+    fetch(`https://raveout-backend-beige.vercel.app/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

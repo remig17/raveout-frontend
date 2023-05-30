@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "RaveOut",
+    "slug": "raveout",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.gif",
+      "image": "./assets/splash2.png",
       "resizeMode": "cover",
       "backgroundColor": "#262626"
     },

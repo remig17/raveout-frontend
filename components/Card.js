@@ -17,7 +17,7 @@ export default function Card(props) {
   const [isLiked, setIsLiked] = useState(props.isLiked);
 
   const handleLike = async () => {
-    const response = await fetch(`http://${PORT}:3000/users/like`, {
+    const response = await fetch(`https://raveout-backend-beige.vercel.app/users/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, eventId: props._id }),

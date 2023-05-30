@@ -38,7 +38,7 @@ export default function ProfileScreen() {
   };
 
   useEffect(() => {
-    fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
+    fetch(`https://raveout-backend-beige.vercel.app/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
