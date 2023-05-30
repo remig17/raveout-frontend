@@ -32,7 +32,7 @@ export default function NavbarScreen() {
   };
 
   useEffect(() => {
-    fetch(`https://raveout-backend-beige.vercel.app/users/userdata/${user.token}`)
+    fetch(`https://raveout-backend-hypqcn3ef-invectivsystem.vercel.app/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);

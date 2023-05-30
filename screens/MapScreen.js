@@ -68,7 +68,7 @@ export default function MapScreen() {
 
   useEffect(() => {
     (async () => {
-      fetch(`https://raveout-backend-beige.vercel.app/events/showAllEvent`)
+      fetch(`https://raveout-backend-hypqcn3ef-invectivsystem.vercel.app/events/showAllEvent`)
         .then((response) => response.json())
         .then((data) => {
           setLocations(data.event);

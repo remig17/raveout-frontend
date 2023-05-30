@@ -36,7 +36,7 @@ export default function EditPhotoScreen() {
       type: "image/jpeg",
     });
 
-    fetch('https://raveout-backend-beige.vercel.app/users/avatarUpdate', {
+    fetch(`http://${PORT}:3000/users/avatarUpdate`, {
       method: "POST",
       body: formData,
     })
