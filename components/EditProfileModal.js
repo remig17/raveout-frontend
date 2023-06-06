@@ -23,7 +23,7 @@ const EditProfileModal = ({ visible, onClose }) => {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const handleSave = () => {
-    fetch(`https://raveout-backend-hypqcn3ef-invectivsystem.vercel.app/users/modifyProfile`, {
+    fetch(`https://raveout-backend-beige.vercel.app/users/modifyProfile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
