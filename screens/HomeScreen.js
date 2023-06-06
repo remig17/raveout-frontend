@@ -26,12 +26,12 @@ export default function HomeScreen({ navigation }) {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    fetch(`https://raveout-backend-beige.vercel.app/events/showAllEvent`)
+    fetch(`https://raveout-backend.herokuapp.com/events/showAllEvent`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
       });
-    fetch(`https://raveout-backend-beige.vercel.app/users/showLike/${user.token}`)
+    fetch(`https://raveout-backend.herokuapp.com/users/showLike/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data && data.like && data.like.length > 0) {

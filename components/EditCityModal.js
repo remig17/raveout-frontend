@@ -23,7 +23,7 @@ const EditCityModal = ({ visible, onClose }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetch(`https://raveout-backend-beige.vercel.app/users/userdata/${user.token}`)
+    fetch(`https://raveout-backend.herokuapp.com/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setUserCity(data.user);
@@ -31,7 +31,7 @@ const EditCityModal = ({ visible, onClose }) => {
   }, []);
 
   const handleSave = () => {
-    fetch(`https://raveout-backend-beige.vercel.app/users/cityUpdate`, {
+    fetch(`https://raveout-backend.herokuapp.com/users/cityUpdate`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

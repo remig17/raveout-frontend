@@ -30,7 +30,7 @@ export default function EventScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetch(`https://raveout-backend-beige.vercel.app/events/showEventById/${event.eventId}`)
+    fetch(`https://raveout-backend.herokuapp.com/events/showEventById/${event.eventId}`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);

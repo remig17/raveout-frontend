@@ -24,7 +24,7 @@ export default function PreferenceScreen({ navigation }) {
     console.log("click");
     console.log("ggg", selectedButtons.length);
     if (selectedButtons.length === 3) {
-      fetch(`https://raveout-backend-beige.vercel.app/users/musicUpdate`, {
+      fetch(`https://raveout-backend.herokuapp.com/users/musicUpdate`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(/* { token: user.token, tags: selectedButtons } */),

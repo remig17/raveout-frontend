@@ -42,7 +42,7 @@ export default function Event(props) {
   const handleLike = () => {
     setIsLiked(!isLiked);
 
-    fetch(`https://raveout-backend-beige.vercel.app/users/like`, {
+    fetch(`https://raveout-backend.herokuapp.com/users/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, eventId: props._id }),
