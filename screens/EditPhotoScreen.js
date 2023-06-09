@@ -36,7 +36,7 @@ export default function EditPhotoScreen() {
       type: "image/jpeg",
     });
 
-    fetch(`http://${PORT}:3000/users/avatarUpdate`, {
+    fetch(`https://raveout-backend.herokuapp.com/users/avatarUpdate`, {
       method: "POST",
       body: formData,
     })

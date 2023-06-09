@@ -37,7 +37,7 @@ export default function ProfileScreen() {
   };
 
   useEffect(() => {
-    fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
+    fetch(`https://raveout-backend.herokuapp.com/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);

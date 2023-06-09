@@ -68,7 +68,7 @@ export default function MapScreen() {
 
   useEffect(() => {
     (async () => {
-      fetch(`http://${PORT}:3000/events/showAllEvent`)
+      fetch(`https://raveout-backend.herokuapp.com/events/showAllEvent`)
         .then((response) => response.json())
         .then((data) => {
           setLocations(data.event);

@@ -26,12 +26,12 @@ export default function HomeScreen({ navigation }) {
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    fetch(`http://${PORT}:3000/events/showAllEvent`)
+    fetch(`https://raveout-backend.herokuapp.com/events/showAllEvent`)
       .then((response) => response.json())
       .then((data) => {
         setEventsData(data.event);
       });
-    fetch(`http://${PORT}:3000/users/showLike/${user.token}`)
+    fetch(`https://raveout-backend.herokuapp.com/users/showLike/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data && data.like && data.like.length > 0) {

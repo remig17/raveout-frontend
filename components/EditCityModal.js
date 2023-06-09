@@ -23,7 +23,7 @@ const EditCityModal = ({ visible, onClose }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetch(`http://${PORT}:3000/users/userdata/${user.token}`)
+    fetch(`https://raveout-backend.herokuapp.com/users/userdata/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setUserCity(data.user);
@@ -31,7 +31,7 @@ const EditCityModal = ({ visible, onClose }) => {
   }, []);
 
   const handleSave = () => {
-    fetch(`http://${PORT}:3000/users/cityUpdate`, {
+    fetch(`https://raveout-backend.herokuapp.com/users/cityUpdate`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
