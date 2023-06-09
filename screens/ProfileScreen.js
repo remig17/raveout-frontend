@@ -19,7 +19,6 @@ import { updatePhotoUri } from "../reducers/user";
 import { clearEvent, clearTicket } from "../reducers/event";
 import UserAvatar from "react-native-user-avatar";
 
-
 export default function ProfileScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -46,10 +45,10 @@ export default function ProfileScreen() {
   }, []);
 
   const logout = () => {
-    dispatch(clearEvent())
-    dispatch(clearTicket())
-    navigation.navigate("SignUpSignIn")
-  }
+    dispatch(clearEvent());
+    dispatch(clearTicket());
+    navigation.navigate("SignUpSignIn");
+  };
 
   return (
     <View style={styles.main}>
@@ -85,7 +84,10 @@ export default function ProfileScreen() {
           <Text style={styles.description}>{userData.description}</Text>
           <Text style={styles.passedEvents}>Evènements passés</Text>
           <View style={styles.passedEventsContainer}>
-            <Image
+            <Text style={styles.textNoEvent}>
+              Vous n'avez pas encore d'évènements passés.
+            </Text>
+            {/* <Image
               style={styles.passedEventPhoto}
               source={require("../assets/events/acontraluz.png")}
             ></Image>
@@ -96,11 +98,15 @@ export default function ProfileScreen() {
             <Image
               style={styles.passedEventPhoto}
               source={require("../assets/events/newrave.png")}
-            ></Image>
+            ></Image> */}
           </View>
 
           <View style={styles.logoutcontainer}>
-            <TouchableOpacity onPress={() => {logout()}}>
+            <TouchableOpacity
+              onPress={() => {
+                logout();
+              }}
+            >
               <Text style={styles.logoutText}>Se déconnecter</Text>
             </TouchableOpacity>
           </View>
@@ -191,7 +197,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   logoutcontainer: {
-    marginTop: 100,
+    marginTop: 170,
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "center",
@@ -200,5 +206,9 @@ const styles = StyleSheet.create({
     color: "red",
     fontFamily: "PoppinsSemiBold",
     fontSize: 18,
-  }
+  },
+  textNoEvent: {
+    color: "white",
+    marginLeft: 5,
+  },
 });
